@@ -13,6 +13,9 @@ return [
             'error' => [
                 'email' => [
                     'email' => 'Endereço de email inválido.'
+                ],
+                'message' => [
+                    'required' => 'Escreva alguma mensagem para que a gente possa te ajudar.'
                 ]
             ]
         ]

@@ -69,11 +69,13 @@ class Feedback extends ComponentBase
     {
         return [
             'rules' => [
-                'email' => 'email'
+                'email' => 'email',
+                'message' => 'required'
             ],
 
             'messages' => [
-                'email.email' => Lang::get('ebussola.feedback::lang.component.onSend.error.email.email')
+                'email.email' => Lang::get('ebussola.feedback::lang.component.onSend.error.email.email'),
+                'message.required' => Lang::get('ebussola.feedback::lang.component.onSend.error.message.required')
             ]
         ];
     }

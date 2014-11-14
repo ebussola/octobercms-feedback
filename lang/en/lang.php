@@ -13,6 +13,9 @@ return [
             'error' => [
                 'email' => [
                     'email' => 'Invalid email address, please provide a valid email'
+                ],
+                'message' => [
+                    'required' => 'You need to write something to help us understand your needs.'
                 ]
             ]
         ]
