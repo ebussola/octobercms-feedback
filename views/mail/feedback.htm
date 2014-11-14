@@ -1,0 +1,15 @@
+subject="You received a feedback!"
+==
+You have just received a feedback from your site!
+
+Contact name: {{ _name }}
+Contact email: {{ _email }}
+Message: {{ _message }}
+==
+<h1>You have just received a feedback from your site!</h1>
+<p>
+    Here is the contact information: {{ _name }} &lt;<a href="mailto:{{ _email }}">{{ _email }}</a>&gt; <br>
+</p>
+
+<h2>The message:</h2>
+<p>{{ _message }}</p>

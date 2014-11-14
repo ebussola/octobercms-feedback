@@ -1,0 +1,35 @@
+<form
+        data-request="{{__SELF__}}::onSend"
+        data-request-success="ebussola_feedback_processForm(data)">
+
+    <fieldset>
+        <label for="feedback-name">Name</label>
+        <input type="text" name="feedback[name]" id="feedback-name" />
+    </fieldset>
+    <fieldset>
+        <label for="feedback-email">Email</label>
+        <input type="text" name="feedback[email]" id="feedback-email" />
+    </fieldset>
+    <fieldset>
+        <label for="feedback-message">Message</label>
+        <textarea name="feedback[message]" id="feedback-message"></textarea>
+    </fieldset>
+
+    <input type="submit" />
+
+</form>
+
+<script>
+    function ebussola_feedback_processForm(data) {
+        if (data.error == undefined) {
+            alert(data.result);
+        } else {
+            var error_messages = [];
+            $.each(data.error.messages, function(key, messages) {
+                $.merge(error_messages, messages);
+            });
+
+            alert(error_messages.join("\n"));
+        }
+    }
+</script>
