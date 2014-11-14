@@ -1,4 +1,4 @@
-<?php namespace Ebussola\Feedback\Components;
+<?php namespace eBussola\Feedback\Components;
 
 use Backend\Models\User;
 use Cms\Classes\ComponentBase;
