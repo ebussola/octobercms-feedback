@@ -2,10 +2,12 @@
 
 use Backend\Models\User;
 use Cms\Classes\ComponentBase;
+use Cms\Classes\Page;
 use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use October\Rain\Exception\AjaxException;
 
 class Feedback extends ComponentBase
 {
@@ -21,11 +23,66 @@ class Feedback extends ComponentBase
     public function defineProperties()
     {
         return [
-            'send_to' => [
+//            'method' => [
+//                'title' => 'Send using:',
+//                'description' => '',
+//                'type' => 'dropdown',
+//                'options' => [
+//                    'email' => 'Email',
+//                    'zapier' => 'Zapier through Firebase'
+//                ]
+//            ],
+            'sendTo' => [
                 'title' => Lang::get('ebussola.feedback::lang.component.send_to.title'),
                 'description' => Lang::get('ebussola.feedback::lang.component.send_to.description'),
                 'type' => 'string',
                 'placeholder' => Lang::get('ebussola.feedback::lang.component.send_to.placeholder')
+            ],
+
+            'actionAfterSend' => [
+                'title' => 'Action after send',
+                'description' => 'lorem',
+                'type' => 'dropdown',
+                'options' => [
+                    'redirect' => 'Redirect',
+                    'javascript_alert' => 'Javascript Alert',
+                    'custom_javascript' => 'Custom Javascript'
+                ]
+            ],
+            'actionAfterSendRedirect' => [
+                'title' => 'Redirect To',
+                'description' => '',
+                'type' => 'dropdown',
+                'group' => 'After send actions'
+            ],
+            'actionAfterSendAlert' => [
+                'title' => 'Alert message',
+                'description' => '',
+                'type' => 'string',
+                'group' => 'After send actions'
+            ],
+            'actionAfterSendCustomJs' => [
+                'title' => 'Custom Javascript',
+                'description' => '',
+                'type' => 'string',
+                'group' => 'After send actions'
+            ],
+
+            'actionOnError' => [
+                'title' => 'Action on Error',
+                'description' => 'lorem',
+                'type' => 'dropdown',
+                'options' => [
+                    'javascript_alert' => 'Javascript Alert',
+                    'custom_javascript' => 'Custom Javascript'
+                ],
+                'default' => 'javascript_alert'
+            ],
+            'actionOnErrorCustomJs' => [
+                'title' => 'Custom Javascript',
+                'description' => '',
+                'type' => 'string',
+                'group' => 'After on Error'
             ]
         ];
     }
@@ -33,36 +90,68 @@ class Feedback extends ComponentBase
     public function onSend()
     {
         $data = post('feedback');
-        $send_to = $this->property('send_to', false);
+        $sendTo = $this->property('sendTo', false);
 
         /** @var \Illuminate\Validation\Validator $validator */
-        $validate_data = $this->validateData();
-        $validator = Validator::make($data, $validate_data['rules'], $validate_data['messages']);
+        $validateData = $this->validateData();
+        $validator = Validator::make($data, $validateData['rules'], $validateData['messages']);
         if ($validator->fails()) {
-            return [
-                'error' => [
-                    'messages' => $validator->messages()
-                ]
-            ];
+            switch ($this->property('actionOnError')) {
+                case 'javascript_alert' :
+                    throw new AjaxException(json_encode([
+                        'javascriptAlert' => $validator->messages()
+                    ]));
+                    break;
+
+                case 'custom_javascript' :
+                    throw new AjaxException(json_encode([
+                        'customJavascript' => [
+                            'messages' => $validator->messages(),
+                            'script' => $this->property('actionOnErrorCustomJs')
+                        ]
+                    ]));
+                    break;
+            }
         }
 
-        if ($send_to === false) {
+        if ($sendTo === false) {
             // find the first admin user on the system
-            $send_to = $this->findAdminEmail();
+            $sendTo = $this->findAdminEmail();
         }
 
         // avoiding any octobercms incompatibility
-        $clean_data = [];
+        $cleanData = [];
         foreach ($data as $key => $value) {
-            $clean_data['_'.$key] = $value;
+            $cleanData['_'.$key] = $value;
         }
         unset($data);
 
-        Mail::send('ebussola.feedback::mail.feedback', $clean_data, function(Message $message) use ($send_to) {
-            $message->to($send_to);
+        Mail::queue('ebussola.feedback::mail.feedback', $cleanData, function(Message $message) use ($sendTo) {
+            $message->to($sendTo);
         });
 
-        return Lang::get('ebussola.feedback::lang.component.onSend.success');
+        // Action after send
+        switch ($this->property('actionAfterSend')) {
+            case 'redirect' :
+                return redirect(url($this->property('actionAfterSendRedirect')));
+
+            case 'javascript_alert' :
+                return ['javascriptAlert' => $this->property('actionAfterSendAlert', Lang::get('ebussola.feedback::lang.component.onSend.success'))];
+
+            case 'custom_javascript' :
+                return ['customJavascript' => $this->property('actionAfterSendCustomJs')];
+                break;
+        }
+    }
+
+    public function getActionAfterSendRedirectOptions()
+    {
+        return Page::sortBy('baseFileName')->lists('fileName', 'url');
+    }
+
+    public function getActionOnErrorRedirectOptions()
+    {
+        return Page::sortBy('baseFileName')->lists('fileName', 'url');
     }
 
     protected function validateData()
@@ -86,21 +175,21 @@ class Feedback extends ComponentBase
      */
     private function findAdminEmail()
     {
-        $send_to = false;
+        $sendTo = false;
 
         $users = User::all();
         foreach ($users as $user) {
             if ($user->isSuperUser()) {
-                $send_to = $user->email;
+                $sendTo = $user->email;
                 break;
             }
         }
 
-        if ($send_to === false) {
+        if ($sendTo === false) {
             throw new \ErrorException('None email registered neither exists an admin user on the system (!?)');
         }
 
-        return $send_to;
+        return $sendTo;
     }
 
 }

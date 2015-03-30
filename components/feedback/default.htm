@@ -1,6 +1,7 @@
 <form
-        data-request="{{__SELF__}}::onSend"
-        data-request-success="ebussola_feedback_processForm(data)">
+        data-request="{{ __SELF__ }}::onSend"
+        data-request-success="ebussola_feedback_processForm(data)"
+        data-request-error="ebussola_feedback_processError(jqXHR.responseJSON)">
 
     <fieldset>
         <label for="feedback-name">Name</label>
@@ -21,15 +22,28 @@
 
 <script>
     function ebussola_feedback_processForm(data) {
-        if (data.error == undefined) {
-            alert(data.result);
-        } else {
-            var error_messages = [];
-            $.each(data.error.messages, function(key, messages) {
-                $.merge(error_messages, messages);
-            });
+        if (data.javascriptAlert != undefined) {
+            alert(data.javascriptAlert);
+        }
+        if (data.customJavascript != undefined) {
+            eval(data.customJavascript);
+        }
+    }
 
-            alert(error_messages.join("\n"));
+    function ebussola_feedback_processError(data) {
+        data = JSON.parse(data.result);
+
+        if (data.javascriptAlert != undefined) {
+            $.each(data.javascriptAlert, function(input, messages) {
+                messages.map(function(message) {
+                    alert(message);
+                });
+            });
+        }
+
+        if (data.customJavascript != undefined) {
+            var messages = data.customJavascript.messages;
+            eval(data.customJavascript.script);
         }
     }
 </script>
