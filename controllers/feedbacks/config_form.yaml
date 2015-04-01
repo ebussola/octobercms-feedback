@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: feedback
+
+# Model Form Field configuration
+form: $/ebussola/feedback/models/feedback/fields.yaml
+
+# Model Class name
+modelClass: Ebussola\Feedback\Models\Feedback
+
+# Default redirect location
+defaultRedirect: ebussola/feedback/feedbacks
+
+# Create page
+create:
+    title: Create feedback
+    redirect: ebussola/feedback/feedbacks/update/:id
+    redirectClose: ebussola/feedback/feedbacks
+
+# Update page
+update:
+    title: Edit feedback
+    redirect: ebussola/feedback/feedbacks
+    redirectClose: ebussola/feedback/feedbacks
+
+# Preview page
+preview:
+    title: Preview feedback

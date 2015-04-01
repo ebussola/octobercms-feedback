@@ -1,2 +1,4 @@
 1.0.1: First version of feedback
 1.1.0:
+    - More options for component + Save on DB
+    - create_feedbacks_table.php

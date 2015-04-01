@@ -1,4 +1,4 @@
-<?php namespace eBussola\Feedback;
+<?php namespace Ebussola\Feedback;
 
 use Illuminate\Support\Facades\Lang;
 use System\Classes\PluginBase;
@@ -43,5 +43,34 @@ class Plugin extends PluginBase
             'ebussola.feedback::mail.feedback' => Lang::get('ebussola.feedback::lang.mail_template.description')
         ];
     }
+
+    public function registerNavigation()
+    {
+        return [
+            'feedback' => [
+                'label'       => 'Feedback',
+                'url'         => \Backend::url('ebussola/feedback/feedbacks'),
+                'icon'        => 'icon-comments-o',
+                'permissions' => ['ebussola.feedback.*'],
+
+                'sideMenu' => [
+                    'feedbacks' => [
+                        'label'       => 'List',
+                        'icon'        => 'icon-list-ul',
+                        'url'         => \Backend::url('ebussola/feedback/feedbacks'),
+                        'permissions' => ['ebussola.feedback.list'],
+                    ],
+                    'archived' => [
+                        'label'       => 'Archived',
+                        'icon'        => 'icon-archive',
+                        'url'         => \Backend::url('ebussola/feedback/feedbacks/archived'),
+                        'permissions' => ['ebussola.feedback.archived']
+                    ],
+                ]
+
+            ]
+        ];
+    }
+
 
 }

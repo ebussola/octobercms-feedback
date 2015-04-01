@@ -22,7 +22,7 @@ class Feedback extends ComponentBase
 
     public function defineProperties()
     {
-        return [
+        $properties = [
 //            'method' => [
 //                'title' => 'Send using:',
 //                'description' => '',
@@ -39,6 +39,20 @@ class Feedback extends ComponentBase
                 'placeholder' => Lang::get('ebussola.feedback::lang.component.send_to.placeholder')
             ],
 
+            'saveToDatabase' => [
+                'title' => 'Saves it on database too',
+                'description' => '',
+                'type' => 'checkbox',
+                'default' => true
+            ]
+        ];
+
+        return array_merge($properties, $this->defineJsProperties());
+    }
+
+    private function defineJsProperties()
+    {
+        return [
             'actionAfterSend' => [
                 'title' => 'Action after send',
                 'description' => 'lorem',
@@ -92,8 +106,9 @@ class Feedback extends ComponentBase
         $data = post('feedback');
         $sendTo = $this->property('sendTo', false);
 
-        /** @var \Illuminate\Validation\Validator $validator */
+        // Error Handling
         $validateData = $this->validateData();
+        /** @var \Illuminate\Validation\Validator $validator */
         $validator = Validator::make($data, $validateData['rules'], $validateData['messages']);
         if ($validator->fails()) {
             switch ($this->property('actionOnError')) {
@@ -114,21 +129,12 @@ class Feedback extends ComponentBase
             }
         }
 
-        if ($sendTo === false) {
-            // find the first admin user on the system
-            $sendTo = $this->findAdminEmail();
-        }
+        $this->sendByEmail($sendTo, $data);
 
-        // avoiding any octobercms incompatibility
-        $cleanData = [];
-        foreach ($data as $key => $value) {
-            $cleanData['_'.$key] = $value;
+        if ($this->property('saveToDatabase')) {
+            $feedback = new \Ebussola\Feedback\Models\Feedback($data);
+            $feedback->save();
         }
-        unset($data);
-
-        Mail::queue('ebussola.feedback::mail.feedback', $cleanData, function(Message $message) use ($sendTo) {
-            $message->to($sendTo);
-        });
 
         // Action after send
         switch ($this->property('actionAfterSend')) {
@@ -190,6 +196,30 @@ class Feedback extends ComponentBase
         }
 
         return $sendTo;
+    }
+
+    /**
+     * @param $sendTo
+     * @param $data
+     * @throws \ErrorException
+     */
+    protected function sendByEmail($sendTo, $data)
+    {
+        if ($sendTo === false) {
+            // find the first admin user on the system
+            $sendTo = $this->findAdminEmail();
+        }
+
+        // avoiding any octobercms incompatibility
+        $cleanData = [];
+        foreach ($data as $key => $value) {
+            $cleanData['_' . $key] = $value;
+        }
+        unset($data);
+
+        Mail::queue('ebussola.feedback::mail.feedback', $cleanData, function (Message $message) use ($sendTo) {
+            $message->to($sendTo);
+        });
     }
 
 }
