@@ -1,0 +1,12 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    code:
+        label: Code
+        searchable: true
+
+    name:
+        label: Name
+        searchable: true

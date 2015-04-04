@@ -1,0 +1,14 @@
+{
+    "name": "ebussola/oc-feedback",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leonardo Shinagawa",
+            "email": "leonardo@ebussola.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+      "ktamas77/firebase-php": "~2.0"
+    }
+}

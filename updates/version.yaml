@@ -1,4 +1,6 @@
 1.0.1: First version of feedback
 1.1.0:
-    - More options for component + Save on DB
+    - More options for component + introduced Channels + Save feedbacks on Database
+    - create_channels_table.php
     - create_feedbacks_table.php
+    - seed_default_channel.php

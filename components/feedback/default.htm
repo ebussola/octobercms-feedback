@@ -3,6 +3,8 @@
         data-request-success="ebussola_feedback_processForm(data)"
         data-request-error="ebussola_feedback_processError(jqXHR.responseJSON)">
 
+    <input type="hidden" name="feedback[channel_id]" value="{{ __SELF__.channel.id }}">
+
     <fieldset>
         <label for="feedback-name">Name</label>
         <input type="text" name="feedback[name]" id="feedback-name" />

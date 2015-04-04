@@ -24,7 +24,8 @@ class Feedback extends Model
     protected $fillable = [
         'name',
         'email',
-        'message'
+        'message',
+        'channel_id'
     ];
 
     /**
@@ -32,7 +33,9 @@ class Feedback extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [];
+    public $belongsTo = [
+        'channel' => '\Ebussola\Feedback\Models\Channel'
+    ];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
@@ -43,15 +46,6 @@ class Feedback extends Model
     public static function archive($query)
     {
         $query->update(['archived' => true]);
-    }
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        self::creating(function($feedback) {
-            $feedback->archived = false;
-        });
     }
 
 }

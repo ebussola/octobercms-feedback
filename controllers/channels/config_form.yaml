@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: channel
+
+# Model Form Field configuration
+form: $/ebussola/feedback/models/channel/fields.yaml
+
+# Model Class name
+modelClass: Ebussola\Feedback\Models\Channel
+
+# Default redirect location
+defaultRedirect: ebussola/feedback/channels
+
+# Create page
+create:
+    title: Create channel
+    redirect: ebussola/feedback/channels/update/:id
+    redirectClose: ebussola/feedback/channels
+
+# Update page
+update:
+    title: Edit channel
+    redirect: ebussola/feedback/channels
+    redirectClose: ebussola/feedback/channels
+
+# Preview page
+preview:
+    title: Preview channel

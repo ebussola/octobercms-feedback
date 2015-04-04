@@ -1,0 +1,39 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: Name
+
+    code:
+        label: Code
+        preset:
+            field: name
+            type: slug
+
+    method:
+        label: Method
+        type: dropdown
+        options:
+            none: - None -
+            email: Email
+            firebase: Firebase
+
+    email_destination:
+        label: Email Destination
+        trigger:
+            action: show
+            field: method
+            condition: value[email]
+
+    firebase_path:
+        label: Firebase Path
+        trigger:
+            action: show
+            field: method
+            condition: value[firebase]
+
+    prevent_save_database:
+        label: DO NOT save it to database
+        type: checkbox

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Lang;
 use System\Classes\PluginBase;
+use App;
 
 /**
  * feedback Plugin Information File
@@ -22,6 +23,14 @@ class Plugin extends PluginBase
             'author'      => 'eBussola',
             'icon'        => 'icon-comments-o'
         ];
+    }
+
+    /**
+     * Register method, called when the plugin is first registered.
+     */
+    public function register()
+    {
+        App::register('\Ebussola\Feedback\Classes\ServiceProvider');
     }
 
     public function registerComponents()
@@ -55,8 +64,8 @@ class Plugin extends PluginBase
 
                 'sideMenu' => [
                     'feedbacks' => [
-                        'label'       => 'List',
-                        'icon'        => 'icon-list-ul',
+                        'label'       => 'Inbox',
+                        'icon'        => 'icon-inbox',
                         'url'         => \Backend::url('ebussola/feedback/feedbacks'),
                         'permissions' => ['ebussola.feedback.list'],
                     ],
@@ -68,6 +77,30 @@ class Plugin extends PluginBase
                     ],
                 ]
 
+            ]
+        ];
+    }
+
+    public function registerSettings()
+    {
+        return [
+            'channels' => [
+                'label' => 'Channels',
+                'description' => 'Manage Channels',
+                'category' => 'Feedback',
+                'icon' => 'icon-arrows',
+                'url' => \Backend::url('ebussola/feedback/channels'),
+                'order' => 500,
+                'keywords' => 'feedback channel'
+            ],
+            'firebase' => [
+                'label'       => 'Firebase',
+                'description' => 'Settings for Firebase connection',
+                'category'    => 'Feedback',
+                'icon'        => 'icon-database',
+                'class'       => '\Ebussola\Feedback\Models\Settings',
+                'order'       => 500,
+                'keywords'    => 'feedback firebase'
             ]
         ];
     }

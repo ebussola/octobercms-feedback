@@ -3,14 +3,22 @@
 use Backend\Models\User;
 use Cms\Classes\ComponentBase;
 use Cms\Classes\Page;
+use Ebussola\Feedback\Models\Channel;
+use Firebase\FirebaseLib;
 use Illuminate\Mail\Message;
-use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Validator;
+use Lang;
+use Mail;
+use Validator;
 use October\Rain\Exception\AjaxException;
+use App;
 
 class Feedback extends ComponentBase
 {
+
+    /**
+     * @var Channel
+     */
+    public $channel;
 
     public function componentDetails()
     {
@@ -23,27 +31,11 @@ class Feedback extends ComponentBase
     public function defineProperties()
     {
         $properties = [
-//            'method' => [
-//                'title' => 'Send using:',
-//                'description' => '',
-//                'type' => 'dropdown',
-//                'options' => [
-//                    'email' => 'Email',
-//                    'zapier' => 'Zapier through Firebase'
-//                ]
-//            ],
-            'sendTo' => [
-                'title' => Lang::get('ebussola.feedback::lang.component.send_to.title'),
-                'description' => Lang::get('ebussola.feedback::lang.component.send_to.description'),
-                'type' => 'string',
-                'placeholder' => Lang::get('ebussola.feedback::lang.component.send_to.placeholder')
-            ],
-
-            'saveToDatabase' => [
-                'title' => 'Saves it on database too',
+            'channelCode' => [
+                'title' => 'Channel',
                 'description' => '',
-                'type' => 'checkbox',
-                'default' => true
+                'type' => 'dropdown',
+                'required' => true
             ]
         ];
 
@@ -104,7 +96,7 @@ class Feedback extends ComponentBase
     public function onSend()
     {
         $data = post('feedback');
-        $sendTo = $this->property('sendTo', false);
+        $channel = Channel::getByCode($this->property('channelCode'));
 
         // Error Handling
         $validateData = $this->validateData();
@@ -129,9 +121,19 @@ class Feedback extends ComponentBase
             }
         }
 
-        $this->sendByEmail($sendTo, $data);
+        switch ($channel->method)
+        {
+            case 'email' :
+                $this->sendByEmail($channel->email_destination, $data);
+                break;
 
-        if ($this->property('saveToDatabase')) {
+            case 'firebase' :
+                $this->sendByFirebase($channel->firebase_path, $data);
+                break;
+
+        }
+
+        if (!$channel->prevent_save_database) {
             $feedback = new \Ebussola\Feedback\Models\Feedback($data);
             $feedback->save();
         }
@@ -150,6 +152,11 @@ class Feedback extends ComponentBase
         }
     }
 
+    public function onRun()
+    {
+        $this->channel = Channel::getByCode($this->property('channelCode'));
+    }
+
     public function getActionAfterSendRedirectOptions()
     {
         return Page::sortBy('baseFileName')->lists('fileName', 'url');
@@ -158,6 +165,11 @@ class Feedback extends ComponentBase
     public function getActionOnErrorRedirectOptions()
     {
         return Page::sortBy('baseFileName')->lists('fileName', 'url');
+    }
+
+    public function getChannelCodeOptions()
+    {
+        return Channel::all()->lists('name', 'code');
     }
 
     protected function validateData()
@@ -205,7 +217,7 @@ class Feedback extends ComponentBase
      */
     protected function sendByEmail($sendTo, $data)
     {
-        if ($sendTo === false) {
+        if ($sendTo == null) {
             // find the first admin user on the system
             $sendTo = $this->findAdminEmail();
         }
@@ -220,6 +232,17 @@ class Feedback extends ComponentBase
         Mail::queue('ebussola.feedback::mail.feedback', $cleanData, function (Message $message) use ($sendTo) {
             $message->to($sendTo);
         });
+    }
+
+    /**
+     * @param $data
+     */
+    protected function sendByFirebase($path, $data)
+    {
+        /** @var FirebaseLib $firebase */
+        $firebase = App::make('ebussola.feedback::firebase');
+
+        $firebase->push($path, $data);
     }
 
 }

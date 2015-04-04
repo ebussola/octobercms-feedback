@@ -1,0 +1,6 @@
+fields:
+    url:
+        label: URL
+
+    token:
+        label: Token

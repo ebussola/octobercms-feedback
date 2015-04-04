@@ -19,6 +19,12 @@ class CreateFeedbacksTable extends Migration
             $table->string('email');
             $table->text('message');
             $table->boolean('archived');
+            $table->integer('channel_id')->unsigned();
+
+            $table->foreign('channel_id')
+                ->references('id')
+                ->on('ebussola_feedback_channels')
+                ->onDelete('cascade');
         });
     }
 
