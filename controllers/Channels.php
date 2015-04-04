@@ -2,6 +2,7 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
+use System\Classes\SettingsManager;
 
 /**
  * channels Back-end Controller
@@ -20,6 +21,6 @@ class Channels extends Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('Ebussola.Feedback', 'feedback', 'channels');
+        SettingsManager::setContext('Ebussola.Feedback', 'channels');
     }
 }

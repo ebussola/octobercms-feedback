@@ -76,6 +76,20 @@ class Feedbacks extends Controller
     }
 
     /**
+     * Replace a table column value (<td>...</td>)
+     * @param  \Model $record The populated model used for the column
+     * @param  string $columnName The column name to override
+     * @param  string $definition List definition (optional)
+     * @return string HTML view
+     */
+    public function listOverrideColumnValue($record, $columnName, $definition = null)
+    {
+        if ($columnName == 'message') {
+            return \Str::limit($record->message, 140);
+        }
+    }
+
+    /**
      * Called after the form fields are defined.
      * @param \Backend\Widgets\Form $host The hosting form widget
      * @return void

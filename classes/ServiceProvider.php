@@ -23,7 +23,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function register()
     {
         $this->app->singleton('ebussola.feedback::firebase', function($app) {
-            return new FirebaseLib(Settings::get('url'), Settings::get('token'));
+            return new FirebaseLib(Settings::get('firebase_url'), Settings::get('firebase_token'));
         });
     }
 
