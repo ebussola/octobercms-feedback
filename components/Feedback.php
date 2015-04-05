@@ -8,7 +8,7 @@ use Firebase\FirebaseLib;
 use Illuminate\Mail\Message;
 use Lang;
 use Mail;
-use Validator;
+use October\Rain\Database\ModelException;
 use October\Rain\Exception\AjaxException;
 use App;
 
@@ -97,23 +97,22 @@ class Feedback extends ComponentBase
     {
         $data = post('feedback');
         $channel = Channel::getByCode($this->property('channelCode'));
+        $feedback = new \Ebussola\Feedback\Models\Feedback($data);
 
-        // Error Handling
-        $validateData = $this->validateData();
-        /** @var \Illuminate\Validation\Validator $validator */
-        $validator = Validator::make($data, $validateData['rules'], $validateData['messages']);
-        if ($validator->fails()) {
+        try {
+            $feedback->validate();
+        } catch (ModelException $e) {
             switch ($this->property('actionOnError')) {
                 case 'javascript_alert' :
                     throw new AjaxException(json_encode([
-                        'javascriptAlert' => $validator->messages()
+                        'javascriptAlert' => $e->getErrors()
                     ]));
                     break;
 
                 case 'custom_javascript' :
                     throw new AjaxException(json_encode([
                         'customJavascript' => [
-                            'messages' => $validator->messages(),
+                            'messages' => $e->getErrors(),
                             'script' => $this->property('actionOnErrorCustomJs')
                         ]
                     ]));
@@ -134,7 +133,6 @@ class Feedback extends ComponentBase
         }
 
         if (!$channel->prevent_save_database) {
-            $feedback = new \Ebussola\Feedback\Models\Feedback($data);
             $feedback->save();
         }
 
@@ -170,21 +168,6 @@ class Feedback extends ComponentBase
     public function getChannelCodeOptions()
     {
         return Channel::all()->lists('name', 'code');
-    }
-
-    protected function validateData()
-    {
-        return [
-            'rules' => [
-                'email' => 'email',
-                'message' => 'required'
-            ],
-
-            'messages' => [
-                'email.email' => Lang::get('ebussola.feedback::lang.component.onSend.error.email.email'),
-                'message.required' => Lang::get('ebussola.feedback::lang.component.onSend.error.message.required')
-            ]
-        ];
     }
 
     /**

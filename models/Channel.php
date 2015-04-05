@@ -1,12 +1,14 @@
 <?php namespace Ebussola\Feedback\Models;
 
 use Model;
+use October\Rain\Database\Traits\Validation;
 
 /**
  * Channel Model
  */
 class Channel extends Model
 {
+    use Validation;
 
     /**
      * @var string The database table used by the model.
@@ -29,10 +31,25 @@ class Channel extends Model
     protected $fillable = [
         'name',
         'code',
-
         'method',
         'email_destination',
         'firebase_path'
+    ];
+
+    public $rules = [
+        'name' => 'required',
+        'code' => 'required',
+        'method' => 'required',
+        'email_destination' => 'email',
+        'firebase_path' => 'required_if:method,firebase'
+    ];
+
+    public $attributeNames = [
+        'name' => 'ebussola.feedback::lang.channel.name',
+        'code' => 'ebussola.feedback::lang.channel.code',
+        'method' => 'ebussola.feedback::lang.channel.method',
+        'email_destination' => 'ebussola.feedback::lang.channel.emailDestination',
+        'firebase_path' => 'ebussola.feedback::lang.channel.firebasePath'
     ];
 
     /**

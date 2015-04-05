@@ -4,16 +4,18 @@
 
 fields:
     name:
-        label: ebussola.feedback::lang.backend.settings.channel.name
+        label: ebussola.feedback::lang.channel.name
+        required: true
 
     code:
-        label: ebussola.feedback::lang.backend.settings.channel.code
+        label: ebussola.feedback::lang.channel.code
+        required: true
         preset:
             field: name
             type: slug
 
     method:
-        label: ebussola.feedback::lang.backend.settings.channel.method
+        label: ebussola.feedback::lang.channel.method
         type: dropdown
         options:
             none: - None -
@@ -21,15 +23,17 @@ fields:
             firebase: Firebase
 
     email_destination:
-        label: ebussola.feedback::lang.backend.settings.channel.emailDestination.label
-        commentAbove: ebussola.feedback::lang.backend.settings.channel.emailDestination.comment
+        label: ebussola.feedback::lang.channel.emailDestination
+        commentAbove: ebussola.feedback::lang.backend.settings.channel.emailDestinationComment
+        required: true
         trigger:
             action: show
             field: method
             condition: value[email]
 
     firebase_path:
-        label: ebussola.feedback::lang.backend.settings.channel.firebasePath
+        label: ebussola.feedback::lang.channel.firebasePath
+        required: true
         trigger:
             action: show
             field: method

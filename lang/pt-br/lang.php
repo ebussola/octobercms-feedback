@@ -72,18 +72,24 @@ return [
         ],
         'settings' => [
             'channel' => [
-                'name' => 'Nome',
-                'code' => 'Código',
-                'method' => 'Método',
-                'emailDestination' => [
-                    'label' => 'Enviar para o email:',
-                    'comment' => 'O endereço de email que receberá a mensagem. Deixe em branco caso queira usar o email do administrador.'
-                ],
-                'firebasePath' => 'Firebase Path',
+                'emailDestinationComment' => 'O endereço de email que receberá a mensagem. Deixe em branco caso queira usar o email do administrador.',
                 'preventSaveDatabase' => 'NÃO usar o banco de dados para armazenar as mensagens',
                 'warning' => 'Atenção! Essa configuração não tera nenhuma ação!'
             ]
         ]
+    ],
+
+    'channel' => [
+        'name' => 'Nome',
+        'code' => 'Código',
+        'method' => 'Método',
+        'emailDestination' => 'Email de destino',
+        'firebasePath' => 'Firebase Path',
+    ],
+    'feedback' => [
+        'name' => 'Nome',
+        'email' => 'Email',
+        'message' => 'Mensagem'
     ],
 
     'mail_template' => [

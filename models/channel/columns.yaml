@@ -4,9 +4,9 @@
 
 columns:
     code:
-        label: ebussola.feedback::lang.backend.settings.channel.code
+        label: ebussola.feedback::lang.channel.code
         searchable: true
 
     name:
-        label: ebussola.feedback::lang.backend.settings.channel.name
+        label: ebussola.feedback::lang.channel.name
         searchable: true

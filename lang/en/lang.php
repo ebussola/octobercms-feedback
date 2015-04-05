@@ -72,18 +72,24 @@ return [
         ],
         'settings' => [
             'channel' => [
-                'name' => 'Name',
-                'code' => 'Code',
-                'method' => 'Method',
-                'emailDestination' => [
-                    'label' => 'Send to email address',
-                    'comment' => 'The address to send the feedback. Leave it blank to use the admin\'s address'
-                ],
-                'firebasePath' => 'Firebase Path',
+                'emailDestinationComment' => 'The address to send the feedback. Leave it blank to use the admin\'s address',
                 'preventSaveDatabase' => 'DO NOT save feedback on database',
                 'warning' => 'Warning! This configuration will have no action!'
             ]
         ]
+    ],
+
+    'channel' => [
+        'name' => 'Name',
+        'code' => 'Code',
+        'method' => 'Method',
+        'emailDestination' => 'Email destination',
+        'firebasePath' => 'Firebase Path',
+    ],
+    'feedback' => [
+        'name' => 'Name',
+        'email' => 'Email',
+        'message' => 'Message'
     ],
 
     'mail_template' => [
