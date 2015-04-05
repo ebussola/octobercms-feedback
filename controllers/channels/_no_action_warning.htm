@@ -1,0 +1,30 @@
+<?= Lang::get('ebussola.feedback::lang.backend.settings.channel.warning')?>
+
+<script>
+    (function($) {
+
+        var isMethodValid = true;
+        var isCheckboxValid = true;
+
+        var decideShowHint = function() {
+            if (!isMethodValid && !isCheckboxValid) {
+                $('#Form-field-Channel-warning-group').show();
+            } else {
+                $('#Form-field-Channel-warning-group').hide();
+            }
+        };
+
+        $('#Form-field-Channel-method').change(function() {
+            isMethodValid = (this.value != 'none');
+
+            decideShowHint();
+        }).change();
+
+        $('#Form-field-Channel-prevent_save_database').change(function() {
+            isCheckboxValid = (!$(this).is(':checked'));
+
+            decideShowHint();
+        }).change();
+
+    })(jQuery);
+</script>

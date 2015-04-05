@@ -45,7 +45,11 @@ class Feedbacks extends Controller
 
         Feedback::archive(Feedback::query()->whereIn('id', $feedbackIds));
 
-        \Flash::success(\Lang::get('ebussola.feedback::feedback.archive.success'));
+        if (count($feedbackIds) > 1) {
+            \Flash::success(\Lang::get('ebussola.feedback::lang.backend.feedback.archive.bulkSuccess'));
+        } else {
+            \Flash::success(\Lang::get('ebussola.feedback::lang.backend.feedback.archive.success'));
+        }
         return $this->listRefresh();
     }
 
@@ -53,7 +57,7 @@ class Feedbacks extends Controller
     {
         Feedback::archive(Feedback::query()->where('id', '=', $recordId));
 
-        \Flash::success(\Lang::get('ebussola.feedback::feedback.archive.success'));
+        \Flash::success(\Lang::get('ebussola.feedback::lang.backend.feedback.archive.success'));
         return $this->makeRedirect();
     }
 

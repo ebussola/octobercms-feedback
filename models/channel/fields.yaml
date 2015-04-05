@@ -4,16 +4,16 @@
 
 fields:
     name:
-        label: Name
+        label: ebussola.feedback::lang.backend.settings.channel.name
 
     code:
-        label: Code
+        label: ebussola.feedback::lang.backend.settings.channel.code
         preset:
             field: name
             type: slug
 
     method:
-        label: Method
+        label: ebussola.feedback::lang.backend.settings.channel.method
         type: dropdown
         options:
             none: - None -
@@ -21,19 +21,24 @@ fields:
             firebase: Firebase
 
     email_destination:
-        label: Email Destination
+        label: ebussola.feedback::lang.backend.settings.channel.emailDestination.label
+        commentAbove: ebussola.feedback::lang.backend.settings.channel.emailDestination.comment
         trigger:
             action: show
             field: method
             condition: value[email]
 
     firebase_path:
-        label: Firebase Path
+        label: ebussola.feedback::lang.backend.settings.channel.firebasePath
         trigger:
             action: show
             field: method
             condition: value[firebase]
 
     prevent_save_database:
-        label: DO NOT save it to database
+        label: ebussola.feedback::lang.backend.settings.channel.preventSaveDatabase
         type: checkbox
+
+    warning:
+        type: hint
+        path: @/plugins/ebussola/feedback/controllers/channels/_no_action_warning.htm

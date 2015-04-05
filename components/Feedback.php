@@ -23,8 +23,8 @@ class Feedback extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'Feedback Component',
-            'description' => 'The Feedback component'
+            'name'        => Lang::get('ebussola.feedback::lang.component.feedback.name'),
+            'description' => Lang::get('ebussola.feedback::lang.component.feedback.description')
         ];
     }
 
@@ -32,8 +32,8 @@ class Feedback extends ComponentBase
     {
         $properties = [
             'channelCode' => [
-                'title' => 'Channel',
-                'description' => '',
+                'title' => Lang::get('ebussola.feedback::lang.component.feedback.channelCode.title'),
+                'description' => Lang::get('ebussola.feedback::lang.component.feedback.channelCode.description'),
                 'type' => 'dropdown',
                 'required' => true
             ]
@@ -46,49 +46,49 @@ class Feedback extends ComponentBase
     {
         return [
             'actionAfterSend' => [
-                'title' => 'Action after send',
-                'description' => 'lorem',
+                'title' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.title'),
+                'description' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.description'),
                 'type' => 'dropdown',
                 'options' => [
-                    'redirect' => 'Redirect',
-                    'javascript_alert' => 'Javascript Alert',
-                    'custom_javascript' => 'Custom Javascript'
+                    'redirect' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.options.redirect'),
+                    'javascript_alert' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.options.javascript_alert'),
+                    'custom_javascript' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.options.custom_javascript')
                 ]
             ],
             'actionAfterSendRedirect' => [
-                'title' => 'Redirect To',
-                'description' => '',
+                'title' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSendRedirect.title'),
+                'description' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSendRedirect.description'),
                 'type' => 'dropdown',
-                'group' => 'After send actions'
+                'group' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.groupName')
             ],
             'actionAfterSendAlert' => [
-                'title' => 'Alert message',
-                'description' => '',
+                'title' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSendAlert.title'),
+                'description' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSendAlert.description'),
                 'type' => 'string',
-                'group' => 'After send actions'
+                'group' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.groupName')
             ],
             'actionAfterSendCustomJs' => [
-                'title' => 'Custom Javascript',
-                'description' => '',
+                'title' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSendCustomJs.title'),
+                'description' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSendCustomJs.description'),
                 'type' => 'string',
-                'group' => 'After send actions'
+                'group' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.groupName')
             ],
 
             'actionOnError' => [
-                'title' => 'Action on Error',
-                'description' => 'lorem',
+                'title' => Lang::get('ebussola.feedback::lang.component.feedback.actionOnError.title'),
+                'description' => Lang::get('ebussola.feedback::lang.component.feedback.actionOnError.description'),
                 'type' => 'dropdown',
                 'options' => [
-                    'javascript_alert' => 'Javascript Alert',
-                    'custom_javascript' => 'Custom Javascript'
+                    'javascript_alert' => Lang::get('ebussola.feedback::lang.component.feedback.actionOnError.options.javascript_alert'),
+                    'custom_javascript' => Lang::get('ebussola.feedback::lang.component.feedback.actionOnError.options.custom_javascript')
                 ],
                 'default' => 'javascript_alert'
             ],
             'actionOnErrorCustomJs' => [
-                'title' => 'Custom Javascript',
-                'description' => '',
+                'title' => Lang::get('ebussola.feedback::lang.component.feedback.actionOnErrorCustomJs.title'),
+                'description' => Lang::get('ebussola.feedback::lang.component.feedback.actionOnErrorCustomJs.description'),
                 'type' => 'string',
-                'group' => 'After on Error'
+                'group' => Lang::get('ebussola.feedback::lang.component.feedback.actionOnError.groupName')
             ]
         ];
     }
