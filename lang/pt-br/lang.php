@@ -11,42 +11,13 @@ return [
                 'title' => 'Canal',
                 'description' => 'Selecione o canal que você deseja usar.'
             ],
-
-            'actionAfterSend' => [
-                'title' => 'Ação após enviar',
-                'description' => 'A ação logo após que o usuário envia uma mensagem.',
-                'options' => [
-                    'redirect' => 'Redirecionar',
-                    'javascript_alert' => 'Alerta Javascript (usando a função alert)',
-                    'custom_javascript' => 'Javascript customizado'
-                ],
-                'groupName' => 'Ações após enviar'
+            'successMessage' => [
+                'title' => 'Mensagem de sucesso customizada',
+                'description' => 'Escreva uma mensagem de sucesso, ou deixe em branco para usar o padrão'
             ],
-            'actionAfterSendRedirect' => [
-                'title' => 'Redirecionar o usuário para:',
-                'description' => 'A URL para onde o usuário deve ser redirecionado. Essa opção não funciona com "named routing"'
-            ],
-            'actionAfterSendAlert' => [
-                'title' => 'Mensagem do "alert"',
-                'description' => 'A mensagem que irá aparecer para o usuário. Esta é a maneira mais simples (e feia) de exibir a mensagem ao usuário.'
-            ],
-            'actionAfterSendCustomJs' => [
-                'title' => 'Javascript customizado',
-                'description' => 'Use esta opção para executar uma função feita com javascript.'
-            ],
-
-            'actionOnError' => [
-                'title' => 'Ação de erro',
-                'description' => 'Ação quando acontece um erro.',
-                'options' => [
-                    'javascript_alert' => 'Alerta Javascript (usando a função alert)',
-                    'custom_javascript' => 'Javascript customizado'
-                ],
-                'groupName' => 'Ações após um erro'
-            ],
-            'actionOnErrorCustomJs' => [
-                'title' => 'Javascript customizado',
-                'description' => 'Use esta opção para executar uma função feita com javascript. A variável "messages" está disponível e é um array de mensagem.'
+            'redirectTo' => [
+                'title' => 'Redirecionar para:',
+                'description' => 'Escolha uma página para redirecionar.'
             ]
         ],
 

@@ -8,8 +8,6 @@ use Firebase\FirebaseLib;
 use Illuminate\Mail\Message;
 use Lang;
 use Mail;
-use October\Rain\Database\ModelException;
-use October\Rain\Exception\AjaxException;
 use App;
 
 class Feedback extends ComponentBase
@@ -30,95 +28,36 @@ class Feedback extends ComponentBase
 
     public function defineProperties()
     {
-        $properties = [
+        return [
             'channelCode' => [
                 'title' => Lang::get('ebussola.feedback::lang.component.feedback.channelCode.title'),
                 'description' => Lang::get('ebussola.feedback::lang.component.feedback.channelCode.description'),
                 'type' => 'dropdown',
                 'required' => true
-            ]
-        ];
-
-        return array_merge($properties, $this->defineJsProperties());
-    }
-
-    private function defineJsProperties()
-    {
-        return [
-            'actionAfterSend' => [
-                'title' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.title'),
-                'description' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.description'),
+            ],
+            'successMessage' => [
+                'title' => Lang::get('ebussola.feedback::lang.component.feedback.successMessage.title'),
+                'description' => Lang::get('ebussola.feedback::lang.component.feedback.successMessage.description')
+            ],
+            'redirectTo' => [
+                'title' => Lang::get('ebussola.feedback::lang.component.feedback.redirectTo.title'),
+                'description' => Lang::get('ebussola.feedback::lang.component.feedback.redirectTo.description'),
                 'type' => 'dropdown',
-                'options' => [
-                    'redirect' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.options.redirect'),
-                    'javascript_alert' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.options.javascript_alert'),
-                    'custom_javascript' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.options.custom_javascript')
-                ]
-            ],
-            'actionAfterSendRedirect' => [
-                'title' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSendRedirect.title'),
-                'description' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSendRedirect.description'),
-                'type' => 'dropdown',
-                'group' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.groupName')
-            ],
-            'actionAfterSendAlert' => [
-                'title' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSendAlert.title'),
-                'description' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSendAlert.description'),
-                'type' => 'string',
-                'group' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.groupName')
-            ],
-            'actionAfterSendCustomJs' => [
-                'title' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSendCustomJs.title'),
-                'description' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSendCustomJs.description'),
-                'type' => 'string',
-                'group' => Lang::get('ebussola.feedback::lang.component.feedback.actionAfterSend.groupName')
-            ],
-
-            'actionOnError' => [
-                'title' => Lang::get('ebussola.feedback::lang.component.feedback.actionOnError.title'),
-                'description' => Lang::get('ebussola.feedback::lang.component.feedback.actionOnError.description'),
-                'type' => 'dropdown',
-                'options' => [
-                    'javascript_alert' => Lang::get('ebussola.feedback::lang.component.feedback.actionOnError.options.javascript_alert'),
-                    'custom_javascript' => Lang::get('ebussola.feedback::lang.component.feedback.actionOnError.options.custom_javascript')
-                ],
-                'default' => 'javascript_alert'
-            ],
-            'actionOnErrorCustomJs' => [
-                'title' => Lang::get('ebussola.feedback::lang.component.feedback.actionOnErrorCustomJs.title'),
-                'description' => Lang::get('ebussola.feedback::lang.component.feedback.actionOnErrorCustomJs.description'),
-                'type' => 'string',
-                'group' => Lang::get('ebussola.feedback::lang.component.feedback.actionOnError.groupName')
+                'default' => 0
             ]
         ];
     }
 
+    /**
+     * @throws \October\Rain\Database\ModelException
+     */
     public function onSend()
     {
         $data = post('feedback');
         $channel = Channel::getByCode($this->property('channelCode'));
         $feedback = new \Ebussola\Feedback\Models\Feedback($data);
 
-        try {
-            $feedback->validate();
-        } catch (ModelException $e) {
-            switch ($this->property('actionOnError')) {
-                case 'javascript_alert' :
-                    throw new AjaxException(json_encode([
-                        'javascriptAlert' => $e->getErrors()
-                    ]));
-                    break;
-
-                case 'custom_javascript' :
-                    throw new AjaxException(json_encode([
-                        'customJavascript' => [
-                            'messages' => $e->getErrors(),
-                            'script' => $this->property('actionOnErrorCustomJs')
-                        ]
-                    ]));
-                    break;
-            }
-        }
+        $feedback->validate();
 
         switch ($channel->method)
         {
@@ -136,17 +75,9 @@ class Feedback extends ComponentBase
             $feedback->save();
         }
 
-        // Action after send
-        switch ($this->property('actionAfterSend')) {
-            case 'redirect' :
-                return redirect(url($this->property('actionAfterSendRedirect')));
-
-            case 'javascript_alert' :
-                return ['javascriptAlert' => $this->property('actionAfterSendAlert', Lang::get('ebussola.feedback::lang.component.onSend.success'))];
-
-            case 'custom_javascript' :
-                return ['customJavascript' => $this->property('actionAfterSendCustomJs')];
-                break;
+        \Flash::success($this->property('successMessage', Lang::get('ebussola.feedback::lang.component.onSend.success')));
+        if ($this->property('redirectTo', false)) {
+            return redirect(url($this->property('redirectTo')));
         }
     }
 
@@ -155,14 +86,9 @@ class Feedback extends ComponentBase
         $this->channel = Channel::getByCode($this->property('channelCode'));
     }
 
-    public function getActionAfterSendRedirectOptions()
+    public function getRedirectToOptions()
     {
-        return Page::sortBy('baseFileName')->lists('fileName', 'url');
-    }
-
-    public function getActionOnErrorRedirectOptions()
-    {
-        return Page::sortBy('baseFileName')->lists('fileName', 'url');
+        return array_merge([0 => '- none -'], Page::sortBy('baseFileName')->lists('fileName', 'url'));
     }
 
     public function getChannelCodeOptions()

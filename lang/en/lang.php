@@ -11,42 +11,13 @@ return [
                 'title' => 'Channel',
                 'description' => 'Select the channel you want to use.'
             ],
-
-            'actionAfterSend' => [
-                'title' => 'Action after send',
-                'description' => 'The action after the user send the feedback.',
-                'options' => [
-                    'redirect' => 'Redirect',
-                    'javascript_alert' => 'Javascript Alert',
-                    'custom_javascript' => 'Custom Javascript'
-                ],
-                'groupName' => 'After send actions'
+            'successMessage' => [
+                'title' => 'Custom Success Message',
+                'description' => 'Set a custom message if you want.'
             ],
-            'actionAfterSendRedirect' => [
-                'title' => 'Redirect To',
-                'description' => 'The URL to redirect. Don\'t work with named routing'
-            ],
-            'actionAfterSendAlert' => [
-                'title' => 'Alert message',
-                'description' => 'The message to be displayed to the user, it is the simplest (and ugliest) way to display the message to user'
-            ],
-            'actionAfterSendCustomJs' => [
-                'title' => 'Custom Javascript',
-                'description' => 'Use this option to execute a function made with javascript.'
-            ],
-
-            'actionOnError' => [
-                'title' => 'Action on Error',
-                'description' => 'The action after an error occurs.',
-                'options' => [
-                    'javascript_alert' => 'Javascript Alert',
-                    'custom_javascript' => 'Custom Javascript'
-                ],
-                'groupName' => 'After on Error'
-            ],
-            'actionOnErrorCustomJs' => [
-                'title' => 'Custom Javascript',
-                'description' => 'Use this option to execute a function made with javascript. The variable "messages" - array of message - is available.'
+            'redirectTo' => [
+                'title' => 'Redirect to:',
+                'description' => 'Choose a page to redirect to, or none.'
             ]
         ],
 

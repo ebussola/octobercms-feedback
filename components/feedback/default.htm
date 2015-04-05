@@ -1,7 +1,5 @@
 <form
-        data-request="{{ __SELF__ }}::onSend"
-        data-request-success="ebussola_feedback_processForm(data)"
-        data-request-error="ebussola_feedback_processError(jqXHR.responseJSON)">
+        data-request="{{ __SELF__ }}::onSend">
     <input type="hidden" name="feedback[channel_id]" value="{{ __SELF__.channel.id }}">
 
     <div class="form-group">
@@ -22,31 +20,3 @@
     <button type="submit" class="btn btn-default">Submit</button>
 
 </form>
-
-<script>
-    function ebussola_feedback_processForm(data) {
-        if (data.javascriptAlert != undefined) {
-            alert(data.javascriptAlert);
-        }
-        if (data.customJavascript != undefined) {
-            eval(data.customJavascript);
-        }
-    }
-
-    function ebussola_feedback_processError(data) {
-        data = JSON.parse(data.result);
-
-        if (data.javascriptAlert != undefined) {
-            $.each(data.javascriptAlert, function(input, messages) {
-                messages.map(function(message) {
-                    alert(message);
-                });
-            });
-        }
-
-        if (data.customJavascript != undefined) {
-            var messages = data.customJavascript.messages;
-            eval(data.customJavascript.script);
-        }
-    }
-</script>
