@@ -22,6 +22,11 @@ class Feedbacks extends Controller
         'archived' => 'config_list_archived.yaml'
     ];
 
+    /**
+     * @var array Permissions required to view this page.
+     */
+    protected $requiredPermissions = ['ebussola.feedback.manage'];
+
     public function __construct()
     {
         parent::__construct();

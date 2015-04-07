@@ -65,5 +65,15 @@ return [
 
     'mail_template' => [
         'description' => 'A mensagem que será enviada para o endereço de email selecionado.'
+    ],
+
+    'permissions' => [
+        'feedback' => [
+            'manage' => 'Gerenciar feedbacks'
+        ],
+        'settings' => [
+            'firebase' => 'Configurações do Firebase',
+            'channel' => 'Gerenciar canais do Feedback'
+        ]
     ]
 ];

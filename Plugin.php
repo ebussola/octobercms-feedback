@@ -41,6 +41,18 @@ class Plugin extends PluginBase
     }
 
     /**
+     * Registers any back-end permissions used by this plugin.
+     */
+    public function registerPermissions()
+    {
+        return [
+            'ebussola.feedback.manage' => ['label' => 'ebussola.feedback::lang.permissions.feedback.manage', 'tab' => 'cms::lang.permissions.name'],
+            'ebussola.feedback.settings.firebase' => ['label' => 'ebussola.feedback::lang.permissions.settings.firebase', 'tab' => 'system::lang.permissions.name'],
+            'ebussola.feedback.settings.channel' => ['label' => 'ebussola.feedback::lang.permissions.settings.channel', 'tab' => 'system::lang.permissions.name']
+        ];
+    }
+
+    /**
      * Registers any mail templates implemented by this plugin.
      * The templates must be returned in the following format:
      * ['acme.blog::mail.welcome' => 'This is a description of the welcome template'],
@@ -60,20 +72,20 @@ class Plugin extends PluginBase
                 'label'       => 'Feedback',
                 'url'         => \Backend::url('ebussola/feedback/feedbacks'),
                 'icon'        => 'icon-comments-o',
-                'permissions' => ['ebussola.feedback.*'],
+                'permissions' => ['ebussola.feedback.manage'],
 
                 'sideMenu' => [
                     'feedbacks' => [
                         'label'       => 'Inbox',
                         'icon'        => 'icon-inbox',
                         'url'         => \Backend::url('ebussola/feedback/feedbacks'),
-                        'permissions' => ['ebussola.feedback.list'],
+                        'permissions' => ['ebussola.feedback.manage'],
                     ],
                     'archived' => [
                         'label'       => 'Archived',
                         'icon'        => 'icon-archive',
                         'url'         => \Backend::url('ebussola/feedback/feedbacks/archived'),
-                        'permissions' => ['ebussola.feedback.archived']
+                        'permissions' => ['ebussola.feedback.manage']
                     ],
                 ]
 
@@ -91,7 +103,8 @@ class Plugin extends PluginBase
                 'icon' => 'icon-arrows',
                 'url' => \Backend::url('ebussola/feedback/channels'),
                 'order' => 500,
-                'keywords' => 'feedback channel'
+                'keywords' => 'feedback channel',
+                'permissions' => ['ebussola.feedback.settings.channel']
             ],
             'firebase' => [
                 'label'       => 'Firebase',
@@ -100,7 +113,8 @@ class Plugin extends PluginBase
                 'icon'        => 'icon-database',
                 'class'       => '\Ebussola\Feedback\Models\Settings',
                 'order'       => 500,
-                'keywords'    => 'feedback firebase'
+                'keywords'    => 'feedback firebase',
+                'permissions' => ['ebussola.feedback.settings.firebase']
             ]
         ];
     }
