@@ -17,27 +17,6 @@ fields:
     method:
         label: ebussola.feedback::lang.channel.method
         type: dropdown
-        options:
-            none: - None -
-            email: Email
-            firebase: Firebase
-
-    email_destination:
-        label: ebussola.feedback::lang.channel.emailDestination
-        commentAbove: ebussola.feedback::lang.backend.settings.channel.emailDestinationComment
-        required: true
-        trigger:
-            action: show
-            field: method
-            condition: value[email]
-
-    firebase_path:
-        label: ebussola.feedback::lang.channel.firebasePath
-        required: true
-        trigger:
-            action: show
-            field: method
-            condition: value[firebase]
 
     prevent_save_database:
         label: ebussola.feedback::lang.backend.settings.channel.preventSaveDatabase

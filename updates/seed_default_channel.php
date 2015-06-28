@@ -6,6 +6,10 @@ class SeedDefaultChannel extends \Seeder
 {
     public function run()
     {
-        Channel::create(['name' => 'Default']);
+        Channel::create([
+            'name' => "Default",
+            'code' => "default",
+            'method' => "email"
+        ]);
     }
 }

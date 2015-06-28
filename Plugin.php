@@ -47,7 +47,6 @@ class Plugin extends PluginBase
     {
         return [
             'ebussola.feedback.manage' => ['label' => 'ebussola.feedback::lang.permissions.feedback.manage', 'tab' => 'cms::lang.permissions.name'],
-            'ebussola.feedback.settings.firebase' => ['label' => 'ebussola.feedback::lang.permissions.settings.firebase', 'tab' => 'system::lang.permissions.name'],
             'ebussola.feedback.settings.channel' => ['label' => 'ebussola.feedback::lang.permissions.settings.channel', 'tab' => 'system::lang.permissions.name']
         ];
     }
@@ -105,17 +104,17 @@ class Plugin extends PluginBase
                 'order' => 500,
                 'keywords' => 'feedback channel',
                 'permissions' => ['ebussola.feedback.settings.channel']
-            ],
-            'firebase' => [
-                'label'       => 'Firebase',
-                'description' => 'Settings for Firebase connection',
-                'category'    => 'Feedback',
-                'icon'        => 'icon-database',
-                'class'       => '\Ebussola\Feedback\Models\Settings',
-                'order'       => 500,
-                'keywords'    => 'feedback firebase',
-                'permissions' => ['ebussola.feedback.settings.firebase']
             ]
+//            'firebase' => [
+//                'label'       => 'Firebase',
+//                'description' => 'Settings for Firebase connection',
+//                'category'    => 'Feedback',
+//                'icon'        => 'icon-database',
+//                'class'       => '\Ebussola\Feedback\Models\Settings',
+//                'order'       => 500,
+//                'keywords'    => 'feedback firebase',
+//                'permissions' => ['ebussola.feedback.settings.firebase']
+//            ]
         ];
     }
 

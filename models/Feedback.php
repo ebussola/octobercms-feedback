@@ -1,6 +1,8 @@
 <?php namespace Ebussola\Feedback\Models;
 
 use Model;
+use October\Rain\Database\Builder;
+use October\Rain\Database\QueryBuilder;
 use October\Rain\Database\Traits\Validation;
 
 /**

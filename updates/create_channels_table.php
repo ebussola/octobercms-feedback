@@ -22,8 +22,7 @@ class CreateChannelsTable extends Migration
             $table->boolean('prevent_save_database');
 
             $table->string('method');
-            $table->string('email_destination')->nullable();
-            $table->string('firebase_path')->nullable();
+            $table->string('method_data')->nullable();
         });
     }
 

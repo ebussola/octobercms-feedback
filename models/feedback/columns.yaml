@@ -15,6 +15,10 @@ columns:
     message:
         label: Message summary
         searchable: true
+    channel:
+        label: Channel
+        relation: channel
+        select: name
     created_at:
         label: Created at
         searchable: true

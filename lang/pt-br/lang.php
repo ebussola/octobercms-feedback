@@ -54,8 +54,7 @@ return [
         'name' => 'Nome',
         'code' => 'Código',
         'method' => 'Método',
-        'emailDestination' => 'Email de destino',
-        'firebasePath' => 'Firebase Path',
+        'emailDestination' => 'Email de destino'
     ],
     'feedback' => [
         'name' => 'Nome',
@@ -72,7 +71,6 @@ return [
             'manage' => 'Gerenciar feedbacks'
         ],
         'settings' => [
-            'firebase' => 'Configurações do Firebase',
             'channel' => 'Gerenciar canais do Feedback'
         ]
     ]

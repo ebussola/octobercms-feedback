@@ -1,12 +1,12 @@
 <?php namespace Ebussola\Feedback\Models;
 
-use Model;
+use Ebussola\Feedback\Classes\Method;
 use October\Rain\Database\Traits\Validation;
 
 /**
  * Channel Model
  */
-class Channel extends Model
+class Channel extends \October\Rain\Database\Model
 {
     use Validation;
 
@@ -18,7 +18,7 @@ class Channel extends Model
     /**
      * @var array List of attribute names which are json encoded and decoded from the database.
      */
-    protected $jsonable = [];
+    protected $jsonable = ['method_data'];
 
     /**
      * @var array Guarded fields
@@ -32,24 +32,23 @@ class Channel extends Model
         'name',
         'code',
         'method',
-        'email_destination',
-        'firebase_path'
+        'method_data'
     ];
 
     public $rules = [
         'name' => 'required',
         'code' => 'required',
-        'method' => 'required',
-        'email_destination' => 'email',
-        'firebase_path' => 'required_if:method,firebase'
+        'method' => 'required'
     ];
 
     public $attributeNames = [
         'name' => 'ebussola.feedback::lang.channel.name',
         'code' => 'ebussola.feedback::lang.channel.code',
-        'method' => 'ebussola.feedback::lang.channel.method',
-        'email_destination' => 'ebussola.feedback::lang.channel.emailDestination',
-        'firebase_path' => 'ebussola.feedback::lang.channel.firebasePath'
+        'method' => 'ebussola.feedback::lang.channel.method'
+    ];
+
+    public static $methods = [
+        'email' => ['\Ebussola\Feedback\Classes\EmailMethod', "Email"]
     ];
 
     /**
@@ -76,6 +75,54 @@ class Channel extends Model
                 $channel->code = \Str::slug($channel->name);
             }
         });
+
+        if (strstr(\Url::current(), \Backend::baseUrl())) {
+            self::backendBoot();
+        }
+    }
+
+    public static function backendBoot()
+    {
+        foreach (self::$methods as $method) {
+            $namespace = $method[0];
+
+            $method = new $namespace();
+            $method->boot();
+        }
+    }
+
+    public function getMethodOptions()
+    {
+        $options = ['none' => "-- None --"];
+        foreach (self::$methods as $key => $method) {
+            $options[$key] = isset($method[1]) ? $method[1] : $key;
+        }
+
+        return $options;
+    }
+
+    /**
+     * @param string $key
+     * @param string $fqn
+     * @param null|string $alias
+     */
+    public static function registerMethod($key, $fqn, $alias=null)
+    {
+        $config = [$fqn];
+        if ($alias !== null) {
+            $config[] = $alias;
+        }
+
+        self::$methods[$key] = $config;
+    }
+
+    /**
+     * @return Method
+     */
+    public function getMethodObj()
+    {
+        $methodClass = self::$methods[$this->method][0];
+        return new $methodClass();
     }
 
     /**

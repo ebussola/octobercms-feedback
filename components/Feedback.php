@@ -59,17 +59,7 @@ class Feedback extends ComponentBase
 
         $feedback->validate();
 
-        switch ($channel->method)
-        {
-            case 'email' :
-                $this->sendByEmail($channel->email_destination, $data);
-                break;
-
-            case 'firebase' :
-                $this->sendByFirebase($channel->firebase_path, $data);
-                break;
-
-        }
+        $channel->getMethodObj()->send($channel->method_data, $data);
 
         if (!$channel->prevent_save_database) {
             $feedback->save();
@@ -94,64 +84,6 @@ class Feedback extends ComponentBase
     public function getChannelCodeOptions()
     {
         return Channel::all()->lists('name', 'code');
-    }
-
-    /**
-     * @return mixed
-     * @throws \ErrorException
-     */
-    private function findAdminEmail()
-    {
-        $sendTo = false;
-
-        $users = User::all();
-        foreach ($users as $user) {
-            if ($user->isSuperUser()) {
-                $sendTo = $user->email;
-                break;
-            }
-        }
-
-        if ($sendTo === false) {
-            throw new \ErrorException('None email registered neither exists an admin user on the system (!?)');
-        }
-
-        return $sendTo;
-    }
-
-    /**
-     * @param $sendTo
-     * @param $data
-     * @throws \ErrorException
-     */
-    protected function sendByEmail($sendTo, $data)
-    {
-        if ($sendTo == null) {
-            // find the first admin user on the system
-            $sendTo = $this->findAdminEmail();
-        }
-
-        // avoiding any octobercms incompatibility
-        $cleanData = [];
-        foreach ($data as $key => $value) {
-            $cleanData['_' . $key] = $value;
-        }
-        unset($data);
-
-        Mail::queue('ebussola.feedback::mail.feedback', $cleanData, function (Message $message) use ($sendTo) {
-            $message->to($sendTo);
-        });
-    }
-
-    /**
-     * @param $data
-     */
-    protected function sendByFirebase($path, $data)
-    {
-        /** @var FirebaseLib $firebase */
-        $firebase = App::make('ebussola.feedback::firebase');
-
-        $firebase->push($path, $data);
     }
 
 }

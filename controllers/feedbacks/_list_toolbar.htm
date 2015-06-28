@@ -6,7 +6,10 @@
     $('#archive-button').click(function() {
         $.request('onBulkArchive', {
             data: {
-                ids: $('.list-checkbox input[type="checkbox"]').listWidget('getChecked')
+                ids: $('.list-checkbox input[type="checkbox"]:checked').not('#Lists-checkboxAll')
+                        .map(function(index, item) {
+                            return item.value
+                        }).toArray()
             }
         });
     });
