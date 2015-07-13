@@ -55,15 +55,7 @@ class Feedback extends ComponentBase
     {
         $data = post('feedback');
         $channel = Channel::getByCode($this->property('channelCode'));
-        $feedback = new \Ebussola\Feedback\Models\Feedback($data);
-
-        $feedback->validate();
-
-        $channel->getMethodObj()->send($channel->method_data, $data);
-
-        if (!$channel->prevent_save_database) {
-            $feedback->save();
-        }
+        $channel->send($data);
 
         \Flash::success($this->property('successMessage', Lang::get('ebussola.feedback::lang.component.onSend.success')));
         if ($this->property('redirectTo', false)) {

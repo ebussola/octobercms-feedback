@@ -134,4 +134,22 @@ class Channel extends \October\Rain\Database\Model
         return self::query()->where('code', '=', $code)->first();
     }
 
+    /**
+     * @param $data
+     * @throws \October\Rain\Database\ModelException
+     */
+    public function send($data)
+    {
+        $feedback = new \Ebussola\Feedback\Models\Feedback($data);
+        $feedback->channel_id = $this->id;
+
+        $feedback->validate();
+
+        $this->getMethodObj()->send($this->method_data, $data);
+
+        if (!$this->prevent_save_database) {
+            $feedback->save();
+        }
+    }
+
 }

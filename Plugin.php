@@ -105,16 +105,6 @@ class Plugin extends PluginBase
                 'keywords' => 'feedback channel',
                 'permissions' => ['ebussola.feedback.settings.channel']
             ]
-//            'firebase' => [
-//                'label'       => 'Firebase',
-//                'description' => 'Settings for Firebase connection',
-//                'category'    => 'Feedback',
-//                'icon'        => 'icon-database',
-//                'class'       => '\Ebussola\Feedback\Models\Settings',
-//                'order'       => 500,
-//                'keywords'    => 'feedback firebase',
-//                'permissions' => ['ebussola.feedback.settings.firebase']
-//            ]
         ];
     }
 
