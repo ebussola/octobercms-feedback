@@ -6,13 +6,13 @@
  * Time: 10:22
  */
 
-namespace Ebussola\Feedback\Classes;
+namespace eBussola\Feedback\Classes;
 
 
 use Backend\Models\User;
 use Backend\Widgets\Form;
-use Ebussola\Feedback\Controllers\Channels;
-use Ebussola\Feedback\Models\Channel;
+use eBussola\Feedback\Controllers\Channels;
+use eBussola\Feedback\Models\Channel;
 use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Mail;
 

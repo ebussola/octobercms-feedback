@@ -1,4 +1,4 @@
-<?php namespace Ebussola\Feedback\Models;
+<?php namespace eBussola\Feedback\Models;
 
 use Model;
 use October\Rain\Database\Builder;
@@ -67,7 +67,7 @@ class Feedback extends Model
     public $hasOne = [];
     public $hasMany = [];
     public $belongsTo = [
-        'channel' => '\Ebussola\Feedback\Models\Channel'
+        'channel' => '\eBussola\Feedback\Models\Channel'
     ];
     public $belongsToMany = [];
     public $morphTo = [];

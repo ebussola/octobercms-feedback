@@ -9,7 +9,7 @@ name: channel
 form: $/ebussola/feedback/models/channel/fields.yaml
 
 # Model Class name
-modelClass: Ebussola\Feedback\Models\Channel
+modelClass: eBussola\Feedback\Models\Channel
 
 # Default redirect location
 defaultRedirect: ebussola/feedback/channels

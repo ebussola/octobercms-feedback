@@ -6,7 +6,7 @@
 list: $/ebussola/feedback/models/feedback/columns.yaml
 
 # Model Class name
-modelClass: Ebussola\Feedback\Models\Feedback
+modelClass: eBussola\Feedback\Models\Feedback
 
 # List Title
 title: Manage feedbacks
@@ -47,6 +47,6 @@ filter:
     scopes:
         channel:
             label: Channel
-            modelClass: \Ebussola\Feedback\Models\Channel
+            modelClass: \eBussola\Feedback\Models\Channel
             nameFrom: name
             conditions: channel_id in (:filtered)

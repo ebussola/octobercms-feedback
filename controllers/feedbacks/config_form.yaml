@@ -9,7 +9,7 @@ name: feedback
 form: $/ebussola/feedback/models/feedback/fields.yaml
 
 # Model Class name
-modelClass: Ebussola\Feedback\Models\Feedback
+modelClass: eBussola\Feedback\Models\Feedback
 
 # Default redirect location
 defaultRedirect: ebussola/feedback/feedbacks

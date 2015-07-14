@@ -1,4 +1,4 @@
-<?php namespace Ebussola\Feedback\Models;
+<?php namespace eBussola\Feedback\Models;
 
 use Model;
 

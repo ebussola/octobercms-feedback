@@ -1,10 +1,9 @@
-<?php namespace Ebussola\Feedback\Controllers;
+<?php namespace eBussola\Feedback\Controllers;
 
 use Backend\Classes\FormField;
-use Backend\Widgets\Lists;
 use BackendMenu;
 use Backend\Classes\Controller;
-use Ebussola\Feedback\Models\Feedback;
+use eBussola\Feedback\Models\Feedback;
 
 /**
  * feedbacks Back-end Controller
@@ -31,14 +30,14 @@ class Feedbacks extends Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('Ebussola.Feedback', 'feedback', 'feedbacks');
+        BackendMenu::setContext('eBussola.Feedback', 'feedback', 'feedbacks');
 
         $this->pageTitle = $this->pageTitle ?: \Lang::get($this->getConfig('title', 'backend::lang.list.default_title'));
     }
 
     public function archived()
     {
-        BackendMenu::setContext('Ebussola.Feedback', 'feedback', 'archived');
+        BackendMenu::setContext('eBussola.Feedback', 'feedback', 'archived');
 
         $this->bodyClass = 'slim-container';
         $this->makeLists();

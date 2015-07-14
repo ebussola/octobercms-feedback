@@ -6,7 +6,7 @@
  * Time: 10:19
  */
 
-namespace Ebussola\Feedback\Classes;
+namespace eBussola\Feedback\Classes;
 
 
 interface Method

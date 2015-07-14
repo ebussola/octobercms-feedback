@@ -1,4 +1,4 @@
-<?php namespace Ebussola\Feedback;
+<?php namespace eBussola\Feedback;
 
 use Illuminate\Support\Facades\Lang;
 use System\Classes\PluginBase;
@@ -30,7 +30,7 @@ class Plugin extends PluginBase
      */
     public function register()
     {
-        App::register('\Ebussola\Feedback\Classes\ServiceProvider');
+        App::register('\eBussola\Feedback\Classes\ServiceProvider');
     }
 
     public function registerComponents()

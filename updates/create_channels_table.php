@@ -1,4 +1,4 @@
-<?php namespace Ebussola\Feedback\Updates;
+<?php namespace eBussola\Feedback\Updates;
 
 use Illuminate\Database\Schema\Blueprint;
 use Schema;

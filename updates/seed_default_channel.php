@@ -1,6 +1,6 @@
-<?php namespace Ebussola\Feedback\Updates;
+<?php namespace eBussola\Feedback\Updates;
 
-use Ebussola\Feedback\Models\Channel;
+use eBussola\Feedback\Models\Channel;
 
 class SeedDefaultChannel extends \Seeder
 {

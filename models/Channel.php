@@ -1,6 +1,6 @@
-<?php namespace Ebussola\Feedback\Models;
+<?php namespace eBussola\Feedback\Models;
 
-use Ebussola\Feedback\Classes\Method;
+use eBussola\Feedback\Classes\Method;
 use October\Rain\Database\Traits\Validation;
 
 /**
@@ -48,7 +48,7 @@ class Channel extends \October\Rain\Database\Model
     ];
 
     public static $methods = [
-        'email' => ['\Ebussola\Feedback\Classes\EmailMethod', "Email"]
+        'email' => ['\eBussola\Feedback\Classes\EmailMethod', "Email"]
     ];
 
     /**
@@ -56,7 +56,7 @@ class Channel extends \October\Rain\Database\Model
      */
     public $hasOne = [];
     public $hasMany = [
-        'feedbacks' => '\Ebussola\Feedback\Models\Feedback'
+        'feedbacks' => '\eBussola\Feedback\Models\Feedback'
     ];
     public $belongsTo = [];
     public $belongsToMany = [];
@@ -140,7 +140,7 @@ class Channel extends \October\Rain\Database\Model
      */
     public function send($data)
     {
-        $feedback = new \Ebussola\Feedback\Models\Feedback($data);
+        $feedback = new \eBussola\Feedback\Models\Feedback($data);
         $feedback->channel_id = $this->id;
 
         $feedback->validate();

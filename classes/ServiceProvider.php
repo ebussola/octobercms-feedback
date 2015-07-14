@@ -6,10 +6,10 @@
  * Time: 22:08
  */
 
-namespace Ebussola\Feedback\Classes;
+namespace eBussola\Feedback\Classes;
 
 
-use Ebussola\Feedback\Models\Settings;
+use eBussola\Feedback\Models\Settings;
 use Firebase\FirebaseLib;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider

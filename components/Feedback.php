@@ -1,14 +1,9 @@
 <?php namespace eBussola\Feedback\Components;
 
-use Backend\Models\User;
 use Cms\Classes\ComponentBase;
 use Cms\Classes\Page;
-use Ebussola\Feedback\Models\Channel;
-use Firebase\FirebaseLib;
-use Illuminate\Mail\Message;
+use eBussola\Feedback\Models\Channel;
 use Lang;
-use Mail;
-use App;
 
 class Feedback extends ComponentBase
 {

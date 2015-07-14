@@ -6,7 +6,7 @@
 list: $/ebussola/feedback/models/channel/columns.yaml
 
 # Model Class name
-modelClass: Ebussola\Feedback\Models\Channel
+modelClass: eBussola\Feedback\Models\Channel
 
 # List Title
 title: Manage channels
