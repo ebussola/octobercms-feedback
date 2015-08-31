@@ -18,7 +18,7 @@ class CreateFeedbacksTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->text('message');
-            $table->boolean('archived');
+            $table->boolean('archived')->default(false);
             $table->integer('channel_id')->unsigned();
 
             $table->foreign('channel_id')
