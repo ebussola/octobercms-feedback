@@ -4,6 +4,7 @@ use Cms\Classes\ComponentBase;
 use Cms\Classes\Page;
 use eBussola\Feedback\Models\Channel;
 use Lang;
+use October\Rain\Exception\AjaxException;
 
 class Feedback extends ComponentBase
 {
@@ -48,13 +49,23 @@ class Feedback extends ComponentBase
      */
     public function onSend()
     {
-        $data = post('feedback');
-        $channel = Channel::getByCode($this->property('channelCode'));
-        $channel->send($data);
+        try {
+            $data = post('feedback');
+            $channel = Channel::getByCode($this->property('channelCode'));
+            $channel->send($data);
 
-        \Flash::success($this->property('successMessage', Lang::get('ebussola.feedback::lang.component.onSend.success')));
-        if ($this->property('redirectTo', false)) {
-            return redirect(url($this->property('redirectTo')));
+            $message = $this->property('successMessage', Lang::get('ebussola.feedback::lang.component.onSend.success'));
+            \Flash::success($message);
+            if ($this->property('redirectTo', false)) {
+                return redirect(url($this->property('redirectTo')));
+            }
+            else {
+                return $message;
+            }
+        }
+        catch (\Exception $e) {
+            \Flash::error($e->getMessage());
+            throw new AjaxException($e->getMessage());
         }
     }
 

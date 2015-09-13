@@ -1,5 +1,18 @@
-<form
-        data-request="{{ __SELF__ }}::onSend">
+<form onsubmit="ebussolaFeedbackFormSubmit(this, event);" method="POST">
+
+    <script>
+        function ebussolaFeedbackFormSubmit(el, event) {
+            event.preventDefault();
+            $(el).request('{{ __SELF__ }}::onSend', {
+                success: function(data) {
+                    alert(data.result);
+                },
+                error: function(data) {
+                    alert(data.responseJSON.result);
+                }
+            });
+        }
+    </script>
 
     <div class="form-group">
         <label for="feedback-name">Name</label>

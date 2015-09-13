@@ -9,6 +9,12 @@ It uses configurable channels to specify how and which method you want to receiv
 
 Simple search for eBussola.Feedback and install it.
 
+The basic component template uses a javascript alert to show response messages from the backend.
+It is quite ugly, but for who don't know how to code, it is a good start.
+
+However, the messages are stored on the *Flash Bag* too, so you can use the it to display messages.
+See https://octobercms.com/docs/markup/tag-flash
+
 ## Using
 
 Feedback uses Channels to communicate with you, you choose the best one for your needs and configure it.
@@ -16,11 +22,11 @@ Feedback uses Channels to communicate with you, you choose the best one for your
 By default, and for convenience, it will also save the messages on the DB too. (you can disable it)
 
 After the installation, go to Settings > Channels (under Feedback's section).
-You will not notice that you already have one Channel configured. It is the basic Channel that uses the Email and DB,
+You will notice that you already have one Channel configured. It is the basic Channel that uses the Email and DB,
 sending for your Admin's email.
 Reconfigure as you want or create another one.
 
-Once configured, go to your page editor and add the Feedback Component.
+Once configured, go to your page editor (Menu CMS) and add the Feedback Component.
 
 Of course all snippets can be customized, they are used just to faster the development and to be used as a guide.
 
