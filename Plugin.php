@@ -31,6 +31,32 @@ class Plugin extends PluginBase
     public function register()
     {
         App::register('\eBussola\Feedback\Classes\ServiceProvider');
+        
+        \Validator::extend("emails", function($attribute, $value, $parameters) {
+            $rules = [
+                'email' => 'required|email',
+            ];
+
+            $emails = [];
+            if (!is_array($value)) {
+                $emails = explode(',', $value);
+            }
+            else {
+                $emails = [$value];
+            }
+
+            foreach ($emails as $email) {
+                $data = [
+                    'email' => trim($email)
+                ];
+                $validator = \Validator::make($data, $rules);
+                if ($validator->fails()) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
     }
 
     public function registerComponents()
