@@ -38,7 +38,7 @@ class EmailMethod implements Method
         });
 
         Channel::extend(function(Channel $model) {
-            $model->rules['method_data.email_destination'] = "email";
+            $model->rules['method_data.email_destination'] = "emails";
             $model->attributeNames['method_data.email_destination'] = 'ebussola.feedback::lang.channel.emailDestination';
         });
     }
@@ -59,7 +59,7 @@ class EmailMethod implements Method
         unset($data);
 
         Mail::queue('ebussola.feedback::mail.feedback', $cleanData, function (Message $message) use ($sendTo) {
-            $message->to($sendTo);
+            $message->to(array_map('trim', explode(',', $sendTo)));
         });
     }
 
