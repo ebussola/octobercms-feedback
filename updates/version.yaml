@@ -4,4 +4,4 @@
     - create_channels_table.php
     - create_feedbacks_table.php
     - seed_default_channel.php
-1.1.1: added simple alert for form responses + documented how messages work in feedback plugin
+1.1.1: added simple alert for form responses + documented how messages work in feedback plugin + added support for multiples emails
