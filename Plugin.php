@@ -30,8 +30,6 @@ class Plugin extends PluginBase
      */
     public function register()
     {
-        App::register('\eBussola\Feedback\Classes\ServiceProvider');
-        
         \Validator::extend("emails", function($attribute, $value, $parameters) {
             $rules = [
                 'email' => 'required|email',
