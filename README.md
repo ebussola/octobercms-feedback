@@ -32,7 +32,7 @@ Of course all snippets can be customized, they are used just to faster the devel
 
 ### Channels
 
-Channels are the way you want to receive and how you want to receive the messages.
+Channels are the way and how you want to receive the messages.
 
 Each Channel uses a set of configuration. Of course it depends on the Channel you want to use.
 

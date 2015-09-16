@@ -32,6 +32,18 @@ class EmailMethod implements Method
                             'field' => "method",
                             'condition' => "value[email]"
                         ]
+                    ],
+                    'method_data[template]' => [
+                        'type' => 'codeeditor',
+                        'language' => 'html',
+                        'label' => "Template",
+                        'commentAbove' => 'The variables available here are these on the form. If you are using the default component template, they are: name, email and message',
+                        'required' => true,
+                        'trigger' => [
+                            'action' => "show",
+                            'field' => "method",
+                            'condition' => "value[email]"
+                        ]
                     ]
                 ]
             );
@@ -51,14 +63,12 @@ class EmailMethod implements Method
             $sendTo = $this->findAdminEmail();
         }
 
-        // avoiding any octobercms incompatibility
-        $cleanData = [];
-        foreach ($data as $key => $value) {
-            $cleanData['_' . $key] = $value;
-        }
-        unset($data);
+        $loader = new \Twig_Loader_Array(array(
+            'main' => $methodData['template'],
+        ));
+        $twig = new \Twig_Environment($loader);
 
-        Mail::queue('ebussola.feedback::mail.feedback', $cleanData, function (Message $message) use ($sendTo) {
+        Mail::queue(['raw' => $twig->render('main', $data)], [], function (Message $message) use ($sendTo) {
             $message->to(array_map('trim', explode(',', $sendTo)));
         });
     }
