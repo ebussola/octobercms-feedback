@@ -33,6 +33,15 @@ class EmailMethod implements Method
                             'condition' => "value[email]"
                         ]
                     ],
+                    'method_data[subject]' => [
+                        'label' => "Subject",
+                        'required' => true,
+                        'trigger' => [
+                            'action' => "show",
+                            'field' => "method",
+                            'condition' => "value[email]"
+                        ]
+                    ],
                     'method_data[template]' => [
                         'type' => 'codeeditor',
                         'language' => 'html',
@@ -64,11 +73,14 @@ class EmailMethod implements Method
         }
 
         $loader = new \Twig_Loader_Array(array(
-            'main' => $methodData['template'],
+            'subject' => $methodData['subject'],
+            'main' => $methodData['template']
         ));
         $twig = new \Twig_Environment($loader);
 
-        Mail::queue(['raw' => $twig->render('main', $data)], [], function (Message $message) use ($sendTo) {
+        $subject = $twig->render('subject', $data);
+        Mail::queue('ebussola.feedback::base-email', ['content' => $twig->render('main', $data)], function (Message $message) use ($sendTo, $subject) {
+            $message->subject($subject);
             $message->to(array_map('trim', explode(',', $sendTo)));
         });
     }

@@ -84,7 +84,7 @@ class Plugin extends PluginBase
     public function registerMailTemplates()
     {
         return [
-            'ebussola.feedback::mail.feedback' => Lang::get('ebussola.feedback::lang.mail_template.description')
+            'ebussola.feedback::base-email' => Lang::get('ebussola.feedback::lang.mail_template.description')
         ];
     }
 
