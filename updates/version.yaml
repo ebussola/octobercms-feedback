@@ -6,5 +6,5 @@
     - seed_default_channel.php
 1.1.1: Added simple alert for form responses + documented how messages work in feedback plugin + added support for multiples emails
 1.2.0:
-    - Added template and subject field to Email Method.
+    - Added template and subject field to Email Method. + Added warning message when a channel doesn't exists anymore.
     - adding_template_field_email_method.php

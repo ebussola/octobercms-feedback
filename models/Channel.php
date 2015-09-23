@@ -32,7 +32,8 @@ class Channel extends \October\Rain\Database\Model
         'name',
         'code',
         'method',
-        'method_data'
+        'method_data',
+        'prevent_save_database'
     ];
 
     public $rules = [
@@ -143,13 +144,12 @@ class Channel extends \October\Rain\Database\Model
         $feedback = new \eBussola\Feedback\Models\Feedback($data);
         $feedback->channel_id = $this->id;
 
-        $feedback->validate();
-
-        $this->getMethodObj()->send($this->method_data, $data);
-
         if (!$this->prevent_save_database) {
+            $feedback->validate();
             $feedback->save();
         }
+
+        $this->getMethodObj()->send($this->method_data, $data);
     }
 
 }
