@@ -43,7 +43,7 @@ return [
         ],
         'settings' => [
             'channel' => [
-                'emailDestinationComment' => 'O endereço de email que receberá a mensagem. Deixe em branco caso queira usar o email do administrador.',
+                'emailDestinationComment' => 'O endereço de email que receberá a mensagem. Use vírgula para cadastrar mais de um endereço de email. Deixe em branco caso queira usar o email do administrador.',
                 'preventSaveDatabase' => 'NÃO usar o banco de dados para armazenar as mensagens',
                 'warning' => 'Atenção! Essa configuração não tera nenhuma ação!'
             ]

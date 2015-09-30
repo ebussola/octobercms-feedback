@@ -8,3 +8,5 @@
 1.2.0:
     - Added template and subject field to Email Method. + Added warning message when a channel doesn't exists anymore.
     - adding_template_field_email_method.php
+1.2.1:
+    - Added replyTo (thanks to ribbsousa).

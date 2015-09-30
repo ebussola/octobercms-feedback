@@ -79,9 +79,13 @@ class EmailMethod implements Method
         $twig = new \Twig_Environment($loader);
 
         $subject = $twig->render('subject', $data);
-        Mail::queue('ebussola.feedback::base-email', ['content' => $twig->render('main', $data)], function (Message $message) use ($sendTo, $subject) {
+        Mail::queue('ebussola.feedback::base-email', ['content' => $twig->render('main', $data)], function (Message $message) use ($sendTo, $subject, $data) {
             $message->subject($subject);
             $message->to(array_map('trim', explode(',', $sendTo)));
+
+            $replyTo = $data['email'];
+            $replyToName = isset($data['name']) ? $data['name'] : 'Guest';
+            $message->replyTo($replyTo, $replyToName);
         });
     }
 

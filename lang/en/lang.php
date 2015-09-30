@@ -43,7 +43,7 @@ return [
         ],
         'settings' => [
             'channel' => [
-                'emailDestinationComment' => 'The address to send the feedback. Leave it blank to use the admin\'s address',
+                'emailDestinationComment' => 'The address to send the feedback. Use comma (,) to add more than 1 address. Leave it blank to use the admin\'s address',
                 'preventSaveDatabase' => 'DO NOT save feedback on database',
                 'warning' => 'Warning! This configuration will have no action!'
             ]
