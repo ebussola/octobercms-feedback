@@ -83,9 +83,11 @@ class EmailMethod implements Method
             $message->subject($subject);
             $message->to(array_map('trim', explode(',', $sendTo)));
 
-            $replyTo = $data['email'];
+            $replyTo = isset($data['email']) ? $data['email'] : null;
             $replyToName = isset($data['name']) ? $data['name'] : 'Guest';
-            $message->replyTo($replyTo, $replyToName);
+            if ($replyTo) {
+                $message->replyTo($replyTo, $replyToName);
+            }
         });
     }
 
