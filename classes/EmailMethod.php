@@ -44,7 +44,7 @@ class EmailMethod implements Method
                     ],
                     'method_data[template]' => [
                         'type' => 'codeeditor',
-                        'language' => 'html',
+                        'language' => 'twig',
                         'label' => "Template",
                         'commentAbove' => 'The variables available here are these on the form. If you are using the default component template, they are: name, email and message',
                         'required' => true,

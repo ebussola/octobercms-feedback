@@ -10,3 +10,5 @@
     - adding_template_field_email_method.php
 1.2.1:
     - Added replyTo (thanks to ribbsousa).
+
+1.2.2: Changed from html editor to twig editor (just the syntax settings)
