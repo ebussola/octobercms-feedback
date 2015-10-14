@@ -77,7 +77,7 @@ class Channel extends \October\Rain\Database\Model
             }
         });
 
-        if (strstr(\Url::current(), \Backend::baseUrl())) {
+        if (strstr(\Url::current(), trim(\Backend::baseUrl(), '/'))) {
             self::backendBoot();
         }
     }

@@ -12,3 +12,5 @@
     - Added replyTo (thanks to ribbsousa).
 
 1.2.2: Changed from html editor to twig editor (just the syntax settings)
+
+1.2.3: Fixed: Channel didn't load Method fields.
