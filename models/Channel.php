@@ -49,6 +49,7 @@ class Channel extends \October\Rain\Database\Model
     ];
 
     public static $methods = [
+        'none' => ['\eBussola\Feedback\Classes\NoneMethod', "-- None --"],
         'email' => ['\eBussola\Feedback\Classes\EmailMethod', "Email"]
     ];
 
@@ -94,7 +95,7 @@ class Channel extends \October\Rain\Database\Model
 
     public function getMethodOptions()
     {
-        $options = ['none' => "-- None --"];
+        $options = [];
         foreach (self::$methods as $key => $method) {
             $options[$key] = isset($method[1]) ? $method[1] : $key;
         }
