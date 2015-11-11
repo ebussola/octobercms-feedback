@@ -49,8 +49,9 @@ class Channel extends \October\Rain\Database\Model
     ];
 
     public static $methods = [
-        'none' => ['\eBussola\Feedback\Classes\NoneMethod', "-- None --"],
-        'email' => ['\eBussola\Feedback\Classes\EmailMethod', "Email"]
+        'none' => ['\eBussola\Feedback\Classes\NoneMethod', '-- None --'],
+        'email' => ['\eBussola\Feedback\Classes\EmailMethod', 'Email'],
+        'group' => ['\eBussola\Feedback\Classes\GroupMethod', 'Group']
     ];
 
     /**
