@@ -18,3 +18,5 @@
 1.2.4: Fixed: NoneMethod didn't exist
 
 1.3.0: Introduced Group Channel
+
+1.3.1: Bugfix of column method_data. varchar(255) was not enough changed to longtext
