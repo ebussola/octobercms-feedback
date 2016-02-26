@@ -4,20 +4,20 @@
     - create_channels_table.php
     - create_feedbacks_table.php
     - seed_default_channel.php
-1.1.1: Added simple alert for form responses + documented how messages work in feedback plugin + added support for multiples emails
+1.1.1: "Added simple alert for form responses + documented how messages work in feedback plugin + added support for multiples emails"
 1.2.0:
     - Added template and subject field to Email Method. + Added warning message when a channel doesn't exists anymore.
     - adding_template_field_email_method.php
 1.2.1:
-    - Added replyTo (thanks to ribbsousa).
+    - "Added replyTo (thanks to ribbsousa)."
 
-1.2.2: Changed from html editor to twig editor (just the syntax settings)
+1.2.2: "Changed from html editor to twig editor (just the syntax settings)"
 
-1.2.3: Fixed: Channel didn't load Method fields.
+1.2.3: "Fixed: Channel didn't load Method fields."
 
-1.2.4: Fixed: NoneMethod didn't exist
+1.2.4: "Fixed: NoneMethod didn't exist"
 
-1.3.0: Introduced Group Channel
+1.3.0: "Introduced Group Channel"
 
 1.3.2:
     - Bugfix of column method_data. varchar(255) was not enough changed to longtext
