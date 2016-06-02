@@ -3,7 +3,7 @@
 # ===================================
 
 # Record name
-name: feedback
+name: ebussola.feedback::lang.feedback.one
 
 # Model Form Field configuration
 form: $/ebussola/feedback/models/feedback/fields.yaml
@@ -28,4 +28,4 @@ update:
 
 # Preview page
 preview:
-    title: Preview feedback
+    title: ebussola.feedback::lang.feedback.action.preview
