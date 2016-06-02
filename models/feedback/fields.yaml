@@ -8,11 +8,11 @@ fields:
         disabled: true
 
     name:
-        label: Name
+        label: ebussola.feedback::lang.feedback.name
 
     email:
-        label: Email
+        label: ebussola.feedback::lang.feedback.email
 
     message:
-        label: Message
+        label: ebussola.feedback::lang.feedback.message
         type: textarea
