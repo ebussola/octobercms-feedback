@@ -19,7 +19,7 @@ fields:
         type: dropdown
 
     prevent_save_database:
-        label: ebussola.feedback::lang.backend.settings.channel.preventSaveDatabase
+        label: ebussola.feedback::lang.channel.prevent_save_database
         type: checkbox
 
     warning:
