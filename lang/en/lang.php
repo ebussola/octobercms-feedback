@@ -1,23 +1,26 @@
 <?php
 
-
 return [
+    'plugin' => [
+        'name' => 'Feedback',
+        'description' => 'An easy feedback component for your site'
+    ],
+
     'component' => [
         'feedback' => [
             'name' => 'Feedback',
-            'description' => 'Listen to your users, receive messages and improve your site.',
+            'description' => 'Adds a feedback form to your page',
 
             'channelCode' => [
-                'title' => 'Channel',
-                'description' => 'Select the channel you want to use.'
+                'description' => 'Select the channel you want to use with this form'
             ],
             'successMessage' => [
-                'title' => 'Custom Success Message',
-                'description' => 'Set a custom message if you want.'
+                'title' => 'Custom success message',
+                'description' => 'You can specify a custom message that will be shown to a user after successful form submit'
             ],
             'redirectTo' => [
-                'title' => 'Redirect to:',
-                'description' => 'Choose a page to redirect to, or none.'
+                'title' => 'Redirect to',
+                'description' => 'You can choose a page to redirect to after successful form submit'
             ]
         ],
 
@@ -26,11 +29,31 @@ return [
             'error' => [
                 'email' => [
                     'email' => 'Invalid email address, please provide a valid email'
-                ],
-                'message' => [
-                    'required' => 'You need to write something to help us understand your needs.'
                 ]
             ]
+        ]
+    ],
+
+    'navigation' => [
+        'menu' => [
+            'side' => [
+                'feedbacks' => 'Inbox',
+                'archived' => 'Archived'
+            ],
+            'settings' => [
+                'channels' => [
+                    'description' => 'Manage channels'
+                ]
+            ]
+        ],
+        'channels' => [
+            'list_title' => 'Channels list',
+            'return_to_list' => 'Return to channels list'
+        ],
+        'feedbacks' => [
+            'list_title' => 'Feedbacks list',
+            'archived_title' => 'Archived feedbacks',
+            'return_to_list' => 'Return to feedbacks list'
         ]
     ],
 
@@ -41,29 +64,59 @@ return [
                 'success' => 'Your feedback was archived'
             ]
         ],
-        'settings' => [
-            'channel' => [
-                'emailDestinationComment' => 'The address to send the feedback. Use comma (,) to add more than 1 address. Leave it blank to use the admin\'s address',
-                'preventSaveDatabase' => 'DO NOT save feedback on database',
-                'warning' => 'Warning! This configuration will have no action!'
-            ]
-        ]
     ],
 
     'channel' => [
+        'one' => 'Channel',
+        'many' => 'Channels',
+
+        'action' => [
+            'create' => 'Create channel',
+            'update' => 'Edit channel',
+            'preview' => 'Preview channel',
+            'creating' => 'Creating channel...',
+            'saving' => 'Saving channel...',
+            'delete_confirm' => 'Do you really want to delete this channel?',
+            'deleting' => 'Deleting channel...'
+        ],
+
         'name' => 'Name',
         'code' => 'Code',
         'method' => 'Method',
-        'emailDestination' => 'Email destination'
+        'prevent_save_database' => 'Do not save feedbacks in a database',
+        'no_action_warning' => 'Warning! This configuration have no action: you will not recive any feedback messages'
     ],
+
+    'method' => [
+        'email' => [
+            'destination' => 'Email destination',
+            'destination_comment' => 'An address where to send the feedback. Use comma (,) to add more than 1 address. Leave it blank to use the admin\'s address',
+            'subject' => 'Subject',
+            'template' => 'Template',
+            'template_comment' => 'The variables available here are these on the form'
+        ],
+        'group' => [
+            'channels_comment' => 'Select one or more channels'
+        ]
+    ],
+
     'feedback' => [
+        'one' => 'Feedback',
+        'many' => 'Feedbacks',
+
+        'action' => [
+            'archive' => 'Archive',
+            'preview' => 'Preview feedback'
+        ],
+
         'name' => 'Name',
         'email' => 'Email',
-        'message' => 'Message'
+        'message' => 'Message',
+        'created_at' => 'Created at'
     ],
 
     'mail_template' => [
-        'description' => 'The feedback message to be sent to the email registered.'
+        'description' => 'The template is used to send messages from the feedback form'
     ],
 
     'permissions' => [
