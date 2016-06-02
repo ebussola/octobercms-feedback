@@ -60,8 +60,6 @@ class EmailMethod implements Method
 
         Channel::extend(function(Channel $model) {
             $model->rules['method_data.email_destination'] = "emails";
-            /** @todo: Remove string below? */
-            $model->attributeNames['method_data.email_destination'] = 'ebussola.feedback::lang.method.email.destination';
         });
     }
 
