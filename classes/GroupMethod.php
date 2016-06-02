@@ -22,8 +22,8 @@ class GroupMethod implements Method
         Channels::extendFormFields(function (Form $form, $model) {
             $form->addFields([
                     'method_data[channels]' => [
-                        'label' => "Channels",
-                        'commentAbove' => "Select one or more channels",
+                        'label' => "ebussola.feedback::lang.channel.many",
+                        'commentAbove' => "ebussola.feedback::lang.method.group.channels_comment",
                         'type' => 'checkboxlist',
                         'options' => Channel::all()->lists('name', 'id'),
                         'required' => true,
