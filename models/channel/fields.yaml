@@ -24,4 +24,4 @@ fields:
 
     warning:
         type: hint
-        path: $/plugins/ebussola/feedback/controllers/channels/_no_action_warning.htm
+        path: $/ebussola/feedback/controllers/channels/_no_action_warning.htm
