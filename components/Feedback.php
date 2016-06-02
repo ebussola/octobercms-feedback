@@ -26,7 +26,7 @@ class Feedback extends ComponentBase
     {
         return [
             'channelCode' => [
-                'title' => Lang::get('ebussola.feedback::lang.component.feedback.channelCode.title'),
+                'title' => Lang::get('ebussola.feedback::lang.channel.one'),
                 'description' => Lang::get('ebussola.feedback::lang.component.feedback.channelCode.description'),
                 'type' => 'dropdown',
                 'required' => true
