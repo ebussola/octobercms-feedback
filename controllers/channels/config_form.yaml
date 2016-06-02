@@ -3,7 +3,7 @@
 # ===================================
 
 # Record name
-name: channel
+name: ebussola.feedback::lang.channel.one
 
 # Model Form Field configuration
 form: $/ebussola/feedback/models/channel/fields.yaml
@@ -16,16 +16,16 @@ defaultRedirect: ebussola/feedback/channels
 
 # Create page
 create:
-    title: Create channel
+    title: ebussola.feedback::lang.channel.action.create
     redirect: ebussola/feedback/channels/update/:id
     redirectClose: ebussola/feedback/channels
 
 # Update page
 update:
-    title: Edit channel
+    title: ebussola.feedback::lang.channel.action.update
     redirect: ebussola/feedback/channels
     redirectClose: ebussola/feedback/channels
 
 # Preview page
 preview:
-    title: Preview channel
+    title: ebussola.feedback::lang.channel.action.preview
