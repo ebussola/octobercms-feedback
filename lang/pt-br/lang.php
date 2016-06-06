@@ -1,14 +1,17 @@
 <?php
 
-
 return [
+    'plugin' => [
+        'name' => 'Feedback',
+        'description' => 'Um componente de feedback fácil de usar.'
+    ],
+
     'component' => [
         'feedback' => [
             'name' => 'Feedback',
-            'description' => 'Escute o que seus usuários têm a dizer, receba mensagens e melhore seu site.',
+            'description' => 'Adiciona um formulário de feedback em sua página',
 
             'channelCode' => [
-                'title' => 'Canal',
                 'description' => 'Selecione o canal que você deseja usar.'
             ],
             'successMessage' => [
@@ -26,52 +29,102 @@ return [
             'error' => [
                 'email' => [
                     'email' => 'Email inválido, por favor, insira um email válido.'
-                ],
-                'message' => [
-                    'required' => 'Você precisa escrever algo para que nos ajude a entender seu problema.'
                 ]
             ]
+        ]
+    ],
+
+    'navigation' => [
+        'menu' => [
+            'side' => [
+                'feedbacks' => 'Inbox',
+                'archived' => 'Arquivo'
+            ],
+            'settings' => [
+                'channels' => [
+                    'description' => 'Gerenciar canais'
+                ]
+            ]
+        ],
+        'channels' => [
+            'list_title' => 'Lista de canais',
+            'return_to_list' => 'Voltar a lista de canais'
+        ],
+        'feedbacks' => [
+            'list_title' => 'Lista de Feedbacks',
+            'archived_title' => 'Feedbacks arquivados',
+            'return_to_list' => 'Voltar a lista de Feedbacks'
         ]
     ],
 
     'backend' => [
         'feedback' => [
             'archive' => [
-                'bulkSuccess' => 'Seus feedbacks foram arquivados',
-                'success' => 'Seu feedback foi arquivado'
+                'bulkSuccess' => 'Seus Feedbacks foram arquivados',
+                'success' => 'Seu Feedback foi arquivado'
             ]
         ],
-        'settings' => [
-            'channel' => [
-                'emailDestinationComment' => 'O endereço de email que receberá a mensagem. Use vírgula para cadastrar mais de um endereço de email. Deixe em branco caso queira usar o email do administrador.',
-                'preventSaveDatabase' => 'NÃO usar o banco de dados para armazenar as mensagens',
-                'warning' => 'Atenção! Essa configuração não tera nenhuma ação!'
-            ]
-        ]
     ],
 
     'channel' => [
+        'one' => 'Canal',
+        'many' => 'Canais',
+
+        'action' => [
+            'create' => 'Criar canal',
+            'update' => 'Editar canal',
+            'preview' => 'Pré-visualizar canal',
+            'creating' => 'Criando canal...',
+            'saving' => 'Salvando canal...',
+            'delete_confirm' => 'Deseja realmente deletar este canal?',
+            'deleting' => 'Deletando canal...'
+        ],
+
         'name' => 'Nome',
         'code' => 'Código',
         'method' => 'Método',
-        'emailDestination' => 'Email de destino'
+        'prevent_save_database' => 'Não salvar os Feedbacks no banco de dados',
+        'no_action_warning' => 'Cuidado! Esta configuração não possui nenhuma ação.'
     ],
+
+    'method' => [
+        'email' => [
+            'destination' => 'Email de destino',
+            'destination_comment' => 'Um endereço para enviar o Feedback. Use vírgula (,) para adicionar mais de 1 endereço. Deixe em branco para utilizar o endereço do Administrador.',
+            'subject' => 'Assunto',
+            'template' => 'Template',
+            'template_comment' => 'As variáveis disponíveis aqui são as mesmas do formulário'
+        ],
+        'group' => [
+            'channels_comment' => 'Selecione um ou mais canais'
+        ]
+    ],
+
     'feedback' => [
+        'one' => 'Feedback',
+        'many' => 'Feedbacks',
+
+        'action' => [
+            'archive' => 'Arquivar',
+            'preview' => 'Prever Feedback'
+        ],
+
         'name' => 'Nome',
         'email' => 'Email',
-        'message' => 'Mensagem'
+        'message' => 'Mensagem',
+        'created_at' => 'Criado em'
     ],
 
     'mail_template' => [
-        'description' => 'A mensagem que será enviada para o endereço de email selecionado.'
+        'description' => 'O template é usado para enviar as mensagens de um formulário de Feedback'
     ],
 
     'permissions' => [
         'feedback' => [
-            'manage' => 'Gerenciar feedbacks'
+            'manage' => 'Gerenciar Feedbacks'
         ],
         'settings' => [
-            'channel' => 'Gerenciar canais do Feedback'
+            'channel' => 'Gerenciar canais de Feedback'
         ]
     ]
 ];
