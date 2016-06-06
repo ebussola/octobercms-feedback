@@ -7,19 +7,19 @@ columns:
         label: ID
         searchable: true
     name:
-        label: Name
+        label: ebussola.feedback::lang.feedback.name
         searchable: true
     email:
-        label: Email
+        label: ebussola.feedback::lang.feedback.email
         searchable: true
     message:
-        label: Message summary
+        label: ebussola.feedback::lang.feedback.message
         searchable: true
     channel:
-        label: Channel
+        label: ebussola.feedback::lang.channel.one
         relation: channel
         select: name
     created_at:
-        label: Created at
+        label: ebussola.feedback::lang.feedback.created_at
         searchable: true
         type: datetime

@@ -9,7 +9,7 @@ list: $/ebussola/feedback/models/feedback/columns.yaml
 modelClass: eBussola\Feedback\Models\Feedback
 
 # List Title
-title: Manage feedbacks
+title: ebussola.feedback::lang.navigation.feedbacks.list_title
 
 # Link URL for each record
 recordUrl: ebussola/feedback/feedbacks/preview/:id
@@ -46,7 +46,7 @@ toolbar:
 filter:
     scopes:
         channel:
-            label: Channel
+            label: ebussola.feedback::lang.channel.one
             modelClass: \eBussola\Feedback\Models\Channel
             nameFrom: name
             conditions: channel_id in (:filtered)

@@ -24,8 +24,8 @@ class EmailMethod implements Method
         Channels::extendFormFields(function (Form $form, $model) {
             $form->addFields([
                     'method_data[email_destination]' => [
-                        'label' => "ebussola.feedback::lang.channel.emailDestination",
-                        'commentAbove' => "ebussola.feedback::lang.backend.settings.channel.emailDestinationComment",
+                        'label' => "ebussola.feedback::lang.method.email.destination",
+                        'commentAbove' => "ebussola.feedback::lang.method.email.destination_comment",
                         'required' => true,
                         'trigger' => [
                             'action' => "show",
@@ -34,7 +34,7 @@ class EmailMethod implements Method
                         ]
                     ],
                     'method_data[subject]' => [
-                        'label' => "Subject",
+                        'label' => "ebussola.feedback::lang.method.email.subject",
                         'required' => true,
                         'trigger' => [
                             'action' => "show",
@@ -45,8 +45,8 @@ class EmailMethod implements Method
                     'method_data[template]' => [
                         'type' => 'codeeditor',
                         'language' => 'twig',
-                        'label' => "Template",
-                        'commentAbove' => 'The variables available here are these on the form. If you are using the default component template, they are: name, email and message',
+                        'label' => "ebussola.feedback::lang.method.email.template",
+                        'commentAbove' => 'ebussola.feedback::lang.method.email.template_comment',
                         'required' => true,
                         'trigger' => [
                             'action' => "show",
@@ -60,7 +60,6 @@ class EmailMethod implements Method
 
         Channel::extend(function(Channel $model) {
             $model->rules['method_data.email_destination'] = "emails";
-            $model->attributeNames['method_data.email_destination'] = 'ebussola.feedback::lang.channel.emailDestination';
         });
     }
 

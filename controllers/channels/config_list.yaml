@@ -9,7 +9,7 @@ list: $/ebussola/feedback/models/channel/columns.yaml
 modelClass: eBussola\Feedback\Models\Channel
 
 # List Title
-title: Manage channels
+title: ebussola.feedback::lang.navigation.channels.list_title
 
 # Link URL for each record
 recordUrl: ebussola/feedback/channels/update/:id

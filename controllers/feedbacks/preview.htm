@@ -1,6 +1,6 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('ebussola/feedback/feedbacks') ?>">feedbacks</a></li>
+        <li><a href="<?= Backend::url('ebussola/feedback/feedbacks') ?>"><?= e(trans('ebussola.feedback::lang.feedback.many')) ?></a></li>
         <li><?= e($this->pageTitle) ?></li>
     </ul>
 <?php Block::endPut() ?>
@@ -14,9 +14,9 @@
     <?php if (!$this->formGetModel()->archived) :?>
         <div class="form-buttons">
             <div class="loading-indicator-container">
-                <button class="btn btn-danger" data-request="onArchive">Archive</button>
+                <button class="btn btn-danger" data-request="onArchive"><?= e(trans('ebussola.feedback::lang.feedback.action.archive')) ?></button>
                 <span class="btn-text">
-                    or <a href="<?= Backend::url('ebussola/feedback/feedbacks') ?>">Cancel</a>
+                    <?= e(trans('backend::lang.form.or')) ?> <a href="<?= Backend::url('ebussola/feedback/feedbacks') ?>"><?= e(trans('backend::lang.form.cancel')) ?></a>
                 </span>
             </div>
         </div>
@@ -25,6 +25,10 @@
 <?php else: ?>
 
     <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('ebussola/feedback/feedbacks') ?>" class="btn btn-default">Return to feedbacks list</a></p>
+    <p>
+        <a href="<?= Backend::url('ebussola/feedback/feedbacks') ?>" class="btn btn-default">
+            <?= e(trans('ebussola.feedback::lang.navigation.feedbacks.return_to_list')) ?>
+        </a>
+    </p>
 
 <?php endif ?>

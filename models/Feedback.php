@@ -1,8 +1,6 @@
 <?php namespace eBussola\Feedback\Models;
 
 use Model;
-use October\Rain\Database\Builder;
-use October\Rain\Database\QueryBuilder;
 use October\Rain\Database\Traits\Validation;
 
 /**
@@ -56,8 +54,7 @@ class Feedback extends Model
      * @var array The array of custom error messages.
      */
     public $customMessages = [
-        'email' => 'ebussola.feedback::lang.component.onSend.error.email.email',
-        'message' => 'ebussola.feedback::lang.component.onSend.error.message.required'
+        'email' => 'ebussola.feedback::lang.component.onSend.error.email.email'
     ];
 
 

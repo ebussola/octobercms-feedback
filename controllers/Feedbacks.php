@@ -31,13 +31,14 @@ class Feedbacks extends Controller
         parent::__construct();
 
         BackendMenu::setContext('eBussola.Feedback', 'feedback', 'feedbacks');
-
-        $this->pageTitle = $this->pageTitle ?: \Lang::get($this->getConfig('title', 'backend::lang.list.default_title'));
     }
 
     public function archived()
     {
         BackendMenu::setContext('eBussola.Feedback', 'feedback', 'archived');
+
+        /** A workaround of OctoberCMS issue https://github.com/octobercms/october/issues/2085 */
+        $this->pageTitle = $this->pageTitle ?: \Lang::get('ebussola.feedback::lang.navigation.feedbacks.archived_title');
 
         $this->bodyClass = 'slim-container';
         $this->makeLists();
