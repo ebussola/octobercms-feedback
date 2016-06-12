@@ -77,6 +77,9 @@ class EmailMethod implements Method
         ));
         $twig = new \Twig_Environment($loader);
 
+        $data['serverName'] = \Request::instance()->server('SERVER_NAME');
+        $data['host'] = \Request::instance()->getSchemeAndHttpHost();
+
         $subject = $twig->render('subject', $data);
         Mail::queue('ebussola.feedback::base-email', ['content' => $twig->render('main', $data)], function (Message $message) use ($sendTo, $subject, $data) {
             $message->subject($subject);
