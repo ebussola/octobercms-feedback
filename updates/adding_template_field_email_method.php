@@ -8,7 +8,7 @@ class AddingTemplateFieldEmailMethod extends \Seeder
     {
         $defaultChannel = Channel::query()->where('code', 'default')->first();
         if ($defaultChannel) {
-            $defaultChannel->method_data = ['template' => '<h1>You have just received a feedback from your site!</h1>
+            $defaultChannel->method_data = ['template' => '<h1>You have just received a feedback from your site <a href="{{ host }}">{{ serverName }}</a>!</h1>
 <p>
     Here is the contact information: {{ name }} &lt;<a href="mailto:{{ email }}">{{ email }}</a>&gt; <br>
 </p>
